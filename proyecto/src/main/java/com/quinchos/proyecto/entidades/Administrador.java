@@ -3,34 +3,27 @@ package com.quinchos.proyecto.entidades;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Propietario {
+public class Administrador {
 
-    private String idPropietario;
-
+    private String idAdministrador;
+    
     private String nombre;
 
     private String apellido;
-
-    private String direccion;
 
     private String email;
 
     private String contraseña;
 
-    private String telefono;
-    
-    
-    public Propietario() {
-
+    public Administrador() {
     }
 
-
-    public String getIdPropietario() {
-        return idPropietario;
+    public String getIdAdministrador() {
+        return idAdministrador;
     }
 
-    public void setIdPropietario(String idPropietario) {
-        this.idPropietario = idPropietario;
+    public void setIdAdministrador(String idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
     public String getNombre() {
@@ -49,14 +42,6 @@ public class Propietario {
         this.apellido = apellido;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -65,24 +50,13 @@ public class Propietario {
         this.email = email;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-
     public String getContraseña() {
         return contraseña;
     }
-
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
-    
     
 }

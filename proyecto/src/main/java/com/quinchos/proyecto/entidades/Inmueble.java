@@ -1,6 +1,7 @@
 package com.quinchos.proyecto.entidades;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Inmueble {
@@ -8,6 +9,10 @@ public class Inmueble {
     private String idInmueble;
 
     private String idPropietario;
+
+    private String idInquilino;
+
+    private String idAlquiler;
 
     private String categoria;
 
@@ -19,17 +24,33 @@ public class Inmueble {
 
     private String descripcion;
 
-    private Integer precioDia;
-
     private Integer superficie;
 
-    private String imagenes;
+    private String imagen;
 
-    private String Servicios;
+    private String[] Servicios;
 
-    private String comentarios;
+    private String[] comentario;
 
-    private String fotoComentario;
+    @ManyToOne
+    private Propietario propietario;
+
+    
+    public String getIdInquilino() {
+        return idInquilino;
+    }
+
+    public void setIdInquilino(String idInquilino) {
+        this.idInquilino = idInquilino;
+    }
+
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
 
     public Inmueble() {
     }
@@ -90,14 +111,6 @@ public class Inmueble {
         this.descripcion = descripcion;
     }
 
-    public Integer getPrecioDia() {
-        return precioDia;
-    }
-
-    public void setPrecioDia(Integer precioDia) {
-        this.precioDia = precioDia;
-    }
-
     public Integer getSuperficie() {
         return superficie;
     }
@@ -106,40 +119,37 @@ public class Inmueble {
         this.superficie = superficie;
     }
 
-    public String getImagenes() {
-        return imagenes;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenes(String imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public String getServicios() {
+    public String[] getServicios() {
         return Servicios;
     }
 
-    public void setServicios(String servicios) {
+    public void setServicios(String[] servicios) {
         Servicios = servicios;
     }
 
-    public String getComentarios() {
-        return comentarios;
+    public String[] getComentario() {
+        return comentario;
     }
 
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public void setComentario(String[] comentario) {
+        this.comentario = comentario;
     }
 
-    public String getFotoComentario() {
-        return fotoComentario;
+    public String getIdAlquiler() {
+        return idAlquiler;
     }
 
-    public void setFotoComentario(String fotoComentario) {
-        this.fotoComentario = fotoComentario;
+    public void setIdAlquiler(String idAlquiler) {
+        this.idAlquiler = idAlquiler;
     }
 
-    
 
-
-    
 }
