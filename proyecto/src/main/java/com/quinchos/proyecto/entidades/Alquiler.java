@@ -1,11 +1,17 @@
 package com.quinchos.proyecto.entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Alquiler {
     
-    
+    @Id
+    @GeneratedValue (generator = "uuid") 
+    @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idAlquiler;
 
     private Integer fechaInicio;
