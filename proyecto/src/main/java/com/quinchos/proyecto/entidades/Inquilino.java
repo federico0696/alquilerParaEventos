@@ -1,21 +1,37 @@
 package com.quinchos.proyecto.entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.quinchos.proyecto.enumeraciones.Rol;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Inquilino {
     
+    @Id
+    @GeneratedValue (generator = "uuid") 
+    @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idInquilino;
 
     private String idInmueble;
 
     private String nombre;
 
-    private String apellido;
-
     private String email;
 
-    private String contraseña;
+    private String password;
+
+    private String telefono;
+
+    private String imagen;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     public Inquilino() {
     }
@@ -44,14 +60,6 @@ public class Inquilino {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -60,12 +68,36 @@ public class Inquilino {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
 

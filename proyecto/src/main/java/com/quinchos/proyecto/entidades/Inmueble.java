@@ -1,11 +1,18 @@
 package com.quinchos.proyecto.entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Inmueble {
 
+    @Id
+    @GeneratedValue (generator = "uuid") 
+    @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idInmueble;
 
     private String idPropietario;
