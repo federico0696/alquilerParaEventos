@@ -1,0 +1,227 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+}
+
+.header{
+    height: 55px;
+    width: 100%;
+    background-color: #1ABC9C;
+    display: flex;
+    justify-content: space-around;
+    gap: 180px;
+    align-items: center;
+    border-bottom: rgb(0, 0, 0) 1px solid;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo img {
+    transition: all 0.7s;
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.logo:hover img{
+    transform: scale(1.1);
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.registro-inicioSesion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.registro-inicioSesion :hover{
+    background-color: #14a387;
+}
+
+.registro-inicioSesion a{
+    font-family: "Open Sans";
+    font-size: 0.8125rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 18px 15px 18px 15px;
+}
+
+.publicaTuEspacio{
+    margin-left: 20px;
+}
+
+.publicaTuEspacio :hover{
+    background-color: #14a387;
+}
+
+.publicaTuEspacio a{
+    border: white 1px solid;
+    border-radius: 3px;
+    font-family: "Open Sans";
+    font-size: 0.8125rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 6px 20px 6px 20px;
+}
+
+.mensajeExito {
+    background-color: rgba(9, 255, 0, 0.4);
+    border: 1px solid rgb(9, 255, 0);
+    padding: 15px;
+    width: 300px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    margin-left: -150px;
+}
+
+.seccion1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('../img/quinchosModernosCopia.jpeg') no-repeat center center; 
+    background-size: cover; 
+    width: 100%;
+    height: 90vh;
+}
+
+.seccion1 img{
+    width: 300px;
+    height: 220px;
+    margin-top: -100px;
+}
+
+.titulo{
+    font-family: "Open Sans";
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.descripcion{
+    font-family: "Open Sans";
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 30px;
+}
+
+/* Estilo general del formulario */
+form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 800px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #0000009d;
+    gap: 10px;
+    margin-bottom: 80px;
+}
+
+/* Estilos para los elementos select e input */
+form select, form input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    cursor: pointer;
+}
+
+/* Icono de flecha para select (solo para webkit) */
+form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjEwIiB3aWR0aD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gPHBhdGggZD0iTTEgMmw0IDQgNC00eiIvPiA8L3N2Zz4=');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+/* Estilos para el botón */
+form button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #14a387;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover en el botón */
+form button:hover {
+    background-color: #0e7f65;
+}
+
+/* Estilos de opción de select al seleccionarse */
+form select:focus, form input[type="number"]:focus {
+    border-color: #14a387;
+    outline: none;
+}
+
+/* Placeholder personalizado para inputs y select */
+form select option, form input[type="number"]::placeholder {
+    color: #999;
+}
+
+.seccion2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 110vh;
+}
+
+footer{
+    background-color: #004a68;
+    width: 100%;
+    height: 40vh;
+}
+
+
+
+
+
+
+
+
+
+

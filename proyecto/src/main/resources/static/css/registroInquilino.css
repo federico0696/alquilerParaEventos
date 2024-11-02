@@ -1,0 +1,6 @@
+.logo img {
+    transition: all 0.7s;
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
