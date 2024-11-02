@@ -48,7 +48,7 @@ public class MenuControlador {
         try {
             inquilinoServicio.registrar(imagen, nombre, telefono, email, password, password2);
             modelo.put("exito", "Inquilino registrado correctamente");
-            return "login.html";
+            return "menu.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -84,10 +84,19 @@ public class MenuControlador {
         }
     }
 
+    @GetMapping("/login")
+    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        if (error != null) {
+            modelo.put("error", "Usuario o Contraseña inválidos!");
+        }
+        return "login.html";
+    }
 
-
-
-
+    @GetMapping("/publicaTuEspacio")
+    public String publicaTuEspacio() {
+        
+        return "publicaTuEspacio.html";
+    }
 
 
 
