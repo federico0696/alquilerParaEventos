@@ -41,7 +41,42 @@
             </div>
             <button type="submit" class="btn">Registrarme</button>
         </form>
-    </div>    
+    </div>
+
+    <div class="modal-overlay2" id="modalOverlay2">
+        <form class="modal-form" th:action="@{/publicaTuEspacio}" method="POST" enctype="multipart/form-data">
+
+            <div class="input-box">
+                <label for="nombre">Nombre y Apellido</label>
+                <input type="text" name="nombre" placeholder="Ingrese su Nombre" th:value="${nombre}" required>
+            </div>
+            <div class="input-box">
+                <label for="direccion">Direccion</label>
+                <input type="text" name="direccion" placeholder="Ingrese su Direccion" th:value="${direccion}" required>
+            </div>
+            <div class="input-box">
+                <label for="telefono">Telefono</label>
+                <input type="text" name="telefono" placeholder="Ingrese su Telefono" th:value="${telefono}" required>
+            </div>
+            <div class="input-box">
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="Ingrese su Email" th:value="${email}" required>
+            </div>
+            <div class="input-box">
+                <label for="imagen">Imagen de perfil</label>
+                <input type="file" name="imagen" placeholder="imagen">
+            </div>
+            <div class="input-box">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+            </div>
+            <div class="input-box">
+                <label for="password">Repita la Contraseña</label>
+                <input type="password" name="password2" placeholder="Repetir Contraseña" required>
+            </div>
+            <button type="submit" class="btn">Registrarme</button>
+        </form>
+    </div>
     <header class="header">
         <div class="logo">
             <a th:href="@{/}">
@@ -53,11 +88,12 @@
             <div class="registro-inicioSesion">
                 <a href="/login" role="button">Iniciar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn">Regístrate (Inquilino)</a>
+                <a href="javascript:void(0);" onclick="openModal2()" class="open-modal-btn">Publica Tu Espacio</a>
             </div>
            
-            <div class="publicaTuEspacio">
+            <!--<div class="publicaTuEspacio">
                 <a href="/publicaTuEspacio" role="button">Publicar tu espacio</a>
-            </div>
+            </div>-->
         </div>
 
     </header>
@@ -84,7 +120,7 @@
                 <option value="Fiesta">Fiesta</option>
                 <option value="Reunion">Reunion</option>
             </select>
-            <input type="number" name="cantidad" min="1" max="99" value="1">
+            <input type="number" name="cantidad" min="1" max="999" value="1">
             <select name="lugar">
                 <option value="GODOY CRUZ">Godoy Cruz</option>
                 <option value="GUAYMALLEN">Guaymallen</option>
