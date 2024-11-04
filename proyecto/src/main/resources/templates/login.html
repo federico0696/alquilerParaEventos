@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="proyecto\src\main\resources\static\css\styles-login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="checkbox" id="showPassword"> Mostrar contraseña
+            
+            <p id="errorMessage" style="color: red; display: none;">No deje ningún campo vacio</p>
+
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+    
+    <script src="proyecto\src\main\resources\static\js\script-login.js"></script>
+</body>
+</html>
