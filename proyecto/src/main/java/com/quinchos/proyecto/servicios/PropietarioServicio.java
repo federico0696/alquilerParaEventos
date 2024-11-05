@@ -61,8 +61,8 @@ public class PropietarioServicio {
         Propietario propietario = new Propietario();
 
         propietario.setNombre(nombre);
-        propietario.setNombre(direccion);
-        propietario.setNombre(telefono);
+        propietario.setDireccion(direccion);
+        propietario.setTelefono(telefono);
         propietario.setEmail(email);
         propietario.setRol(Rol.PROPIETARIO);
         propietario.setImagen("/img/" + imagen.getOriginalFilename());

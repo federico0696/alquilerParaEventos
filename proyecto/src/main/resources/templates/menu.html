@@ -8,75 +8,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/menu.css">
-    
+
 </head>
 
 <body>
     <div class="modal-overlay" id="modalOverlay">
-        <form class="modal-form" th:action="@{/registroInquilino}" method="POST" enctype="multipart/form-data">
+        <div class="contenedorForm">
+            <form class="modal-form" th:action="@{/registroInquilino}" method="POST" enctype="multipart/form-data">
+                <div class="tituloForm">Registrate</div>
 
-            <div class="input-box">
-                <label for="nombre">Nombre y Apellido</label>
-                <input type="text" name="nombre" placeholder="Ingrese su Nombre" th:value="${nombre}" required>
-            </div>
-            <div class="input-box">
-                <label for="telefono">Telefono</label>
-                <input type="text" name="telefono" placeholder="Ingrese su Telefono" th:value="${telefono}" required>
-            </div>
-            <div class="input-box">
-                <label for="email">Email</label>
-                <input type="text" name="email" placeholder="Ingrese su Email" th:value="${email}" required>
-            </div>
-            <div class="input-box">
-                <label for="imagen">Imagen de perfil</label>
-                <input type="file" name="imagen" placeholder="imagen">
-            </div>
-            <div class="input-box">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
-            </div>
-            <div class="input-box">
-                <label for="password">Repita la Contraseña</label>
-                <input type="password" name="password2" placeholder="Repetir Contraseña" required>
-            </div>
-            <button type="submit" class="btn">Registrarme</button>
-        </form>
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="nombre">Nombre y Apellido</label>
+                        <input type="text" name="nombre" placeholder="Ingrese su Nombre" th:value="${nombre}" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="telefono">Telefono</label>
+                        <input type="text" name="telefono" placeholder="Ingrese su Telefono" th:value="${telefono}"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" placeholder="Ingrese su Email" th:value="${email}" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="imagen">Imagen de perfil</label>
+                        <input type="file" name="imagen" placeholder="imagen">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Repita la Contraseña</label>
+                        <input type="password" name="password2" placeholder="Repetir Contraseña" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Registrarme</button>
+            </form>
+        </div>
     </div>
 
-    <div class="modal-overlay2" id="modalOverlay2">
-        <form class="modal-form" th:action="@{/publicaTuEspacio}" method="POST" enctype="multipart/form-data">
 
-            <div class="input-box">
-                <label for="nombre">Nombre y Apellido</label>
-                <input type="text" name="nombre" placeholder="Ingrese su Nombre" th:value="${nombre}" required>
-            </div>
-            <div class="input-box">
-                <label for="direccion">Direccion</label>
-                <input type="text" name="direccion" placeholder="Ingrese su Direccion" th:value="${direccion}" required>
-            </div>
-            <div class="input-box">
-                <label for="telefono">Telefono</label>
-                <input type="text" name="telefono" placeholder="Ingrese su Telefono" th:value="${telefono}" required>
-            </div>
-            <div class="input-box">
-                <label for="email">Email</label>
-                <input type="text" name="email" placeholder="Ingrese su Email" th:value="${email}" required>
-            </div>
-            <div class="input-box">
-                <label for="imagen">Imagen de perfil</label>
-                <input type="file" name="imagen" placeholder="imagen">
-            </div>
-            <div class="input-box">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
-            </div>
-            <div class="input-box">
-                <label for="password">Repita la Contraseña</label>
-                <input type="password" name="password2" placeholder="Repetir Contraseña" required>
-            </div>
-            <button type="submit" class="btn">Registrarme</button>
-        </form>
-    </div>
+
+
+
+
+
+
+
     <header class="header">
         <div class="logo">
             <a th:href="@{/}">
@@ -88,12 +75,11 @@
             <div class="registro-inicioSesion">
                 <a href="/login" role="button">Iniciar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn">Regístrate (Inquilino)</a>
-                <a href="javascript:void(0);" onclick="openModal2()" class="open-modal-btn">Publica Tu Espacio</a>
             </div>
-           
-            <!--<div class="publicaTuEspacio">
+
+            <div class="publicaTuEspacio">
                 <a href="/publicaTuEspacio" role="button">Publicar tu espacio</a>
-            </div>-->
+            </div>
         </div>
 
     </header>
@@ -106,14 +92,30 @@
         <i class="bi bi-x-square cerrar" onclick="ocultarMensaje()"></i>
     </div>
 
+
+
+
+
+
     <div class="seccion1">
-
-        <img th:src="@{/img/logo.png}" alt="Logo" />
-
+        <div class="imagenesInicio">
+            <img th:src="@{/img/logo.png}" alt="Logo" />
+            <div class="carrusel-container">
+                <div class="imagenes-carrusel" id="imagenes-carrusel">
+                    <img class="imagen active" src="/img/Imagen1.jpg" alt="Boda">
+                    <img class="imagen" src="/img/Imagen2.jpg" alt="Graduación">
+                    <img class="imagen" src="/img/Imagen3.jpg" alt="Fiesta Infantil">
+                    <img class="imagen" src="/img/Imagen4.jpg" alt="Celebración Familiar">
+                    <img class="imagen" src="/img/Imagen5.jpg" alt="Reunión de Trabajo">
+                    <img class="imagen" src="/img/Imagen6.jpg" alt="Fiesta Corporativa">
+                </div>
+            </div>
+        </div>
         <p class="titulo">Espacios para momentos que importan</p>
-        <p class="descripcion">Descubre espacios en alquiler para eventos, fiestas, bodas y reuniones en todo Mendoza</p>
+        <p class="descripcion">Descubre espacios en alquiler para eventos, fiestas, bodas y reuniones en todo Mendoza
+        </p>
         <form>
-            <select name="tipoDeEvento" >
+            <select name="tipoDeEvento">
                 <option value="Todas Las Categorias">Todas las categorias</option>
                 <option value="Boda">Boda</option>
                 <option value="Empresarial">Empresarial</option>
@@ -136,29 +138,53 @@
             <div class="fiesta">
                 <img th:src="@{/img/fiesta.jpg}" alt="fiesta">
                 <div class="texto">
-                    <div class="titulo2"><p>Fiesta</p></div>
-                    <div class="descripcion2"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam nisi. Eaque, architecto mollitia?</p></div>
+                    <div class="titulo2">
+                        <p>Fiesta</p>
+                    </div>
+                    <div class="descripcion2">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius
+                            omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam
+                            nisi. Eaque, architecto mollitia?</p>
+                    </div>
                 </div>
             </div>
             <div class="boda">
                 <img th:src="@{/img/boda.jpg}" alt="boda">
                 <div class="texto">
-                    <div class="titulo2"><p>Boda</p></div>
-                    <div class="descripcion2"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam nisi. Eaque, architecto mollitia?</p></div>
+                    <div class="titulo2">
+                        <p>Boda</p>
+                    </div>
+                    <div class="descripcion2">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius
+                            omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam
+                            nisi. Eaque, architecto mollitia?</p>
+                    </div>
                 </div>
             </div>
             <div class="reunion">
                 <img th:src="@{/img/reunion.jpg}" alt="reunion">
                 <div class="texto">
-                    <div class="titulo2"><p>Reunion</p></div>
-                    <div class="descripcion2"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam nisi. Eaque, architecto mollitia?</p></div>
+                    <div class="titulo2">
+                        <p>Reunion</p>
+                    </div>
+                    <div class="descripcion2">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius
+                            omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam
+                            nisi. Eaque, architecto mollitia?</p>
+                    </div>
                 </div>
             </div>
             <div class="empresarial">
                 <img th:src="@{/img/empresarial.jpg}" alt="empresarial">
                 <div class="texto">
-                    <div class="titulo2"><p>Empresarial</p></div>
-                    <div class="descripcion2"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam nisi. Eaque, architecto mollitia?</p></div>
+                    <div class="titulo2">
+                        <p>Empresarial</p>
+                    </div>
+                    <div class="descripcion2">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eaque at necessitatibus. Eius
+                            omnis maxime voluptas vitae minima mollitia numquam perspiciatis ipsum, totam ea nam quam
+                            nisi. Eaque, architecto mollitia?</p>
+                    </div>
                 </div>
             </div>
         </div>
