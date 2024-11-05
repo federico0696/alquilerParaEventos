@@ -19,3 +19,15 @@ document.querySelector('.modal-overlay').addEventListener('click', (e) => {
         closeModal();
     }
 });
+
+function openModal2() {
+    document.querySelector('.modal-overlay2').classList.add('active');
+}
+function closeModal2() {
+    document.querySelector('.modal-overlay2').classList.remove('active');
+}
+document.querySelector('.modal-overlay2').addEventListener('click', (e) => {
+    if (e.target === document.querySelector('.modal-overlay2')) {
+        closeModal2();
+    }
+});

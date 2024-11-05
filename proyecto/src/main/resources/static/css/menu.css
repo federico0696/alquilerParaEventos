@@ -4,7 +4,8 @@
     padding: 0;
     box-sizing: border-box;
 }
-.modal-overlay {
+.modal-overlay,
+ .modal-overlay2 {
     position: fixed;
     top: 0;
     left: 0;
@@ -71,6 +72,9 @@
 
 /* Mostrar el modal cuando esté activo */
 .modal-overlay.active {
+    display: flex;
+}
+.modal-overlay2.active {
     display: flex;
 }
 body{
