@@ -35,11 +35,6 @@ public class MenuControlador {
     }
 
 
-    @GetMapping("/registrarInquilino")
-    public String registrarInquilino() {
-        return "registroInquilino.html";
-    }
-
     @PostMapping("/registroInquilino")
     public String registroInquilino(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono, @RequestParam("email") String email,
             @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
@@ -55,7 +50,7 @@ public class MenuControlador {
             modelo.put("nombre", nombre);
             modelo.put("email", email);
             modelo.put("telefono", telefono);
-            return "registroInquilino.html";
+            return "menu.html";
         }
     }
 /*Se comenta por falta de usa por ahora */
@@ -96,6 +91,7 @@ public class MenuControlador {
         
         return "publicaTuEspacio.html";
     }
+    
     @PostMapping("/publicaTuEspacio")
     public String registroPropietario(@RequestParam("nombre") String nombre, @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono, @RequestParam("email") String email,
                                       @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,

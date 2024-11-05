@@ -58,7 +58,7 @@ public class InquilinoServicio {
         Inquilino inquilino = new Inquilino();
 
         inquilino.setNombre(nombre);
-        inquilino.setNombre(telefono);
+        inquilino.setTelefono(telefono);
         inquilino.setEmail(email);
         inquilino.setRol(Rol.INQUILINO);
         inquilino.setImagen("/img/" + imagen.getOriginalFilename());
