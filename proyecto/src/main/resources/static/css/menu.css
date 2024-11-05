@@ -4,7 +4,79 @@
     padding: 0;
     box-sizing: border-box;
 }
+.modal-overlay,
+ .modal-overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    z-index: 1000;
+}
 
+
+.modal-form {
+    background: #a1bfb6;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    z-index: 1001;
+    flex-direction: column;
+}
+
+.modal-form h2 {
+    margin-bottom: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.modal-form .input-box {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.modal-form .input-box label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.modal-form .input-box input[type="text"],
+.modal-form .input-box input[type="password"],
+.modal-form .input-box input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-form .btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #14a387;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.modal-form .btn:hover {
+    background-color: #45a049;
+}
+
+/* Mostrar el modal cuando esté activo */
+.modal-overlay.active {
+    display: flex;
+}
+.modal-overlay2.active {
+    display: flex;
+}
 body{
     min-height: 100vh;
     background-color: white;

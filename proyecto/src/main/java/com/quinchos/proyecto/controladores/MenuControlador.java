@@ -58,9 +58,8 @@ public class MenuControlador {
             return "registroInquilino.html";
         }
     }
-
-    @GetMapping("/registrarPropietario")
-    public String registrarPropietario() {
+/*Se comenta por falta de usa por ahora */
+    /*public String registrarPropietario() {
         return "registroPropietario.html";
     }
 
@@ -82,7 +81,7 @@ public class MenuControlador {
             modelo.put("telefono", telefono);
             return "registroPropietario.html";
         }
-    }
+    }*/
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
@@ -96,6 +95,25 @@ public class MenuControlador {
     public String publicaTuEspacio() {
         
         return "publicaTuEspacio.html";
+    }
+    @PostMapping("/publicaTuEspacio")
+    public String registroPropietario(@RequestParam("nombre") String nombre, @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono, @RequestParam("email") String email,
+                                      @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
+                                      @RequestParam(required = false) MultipartFile imagen) {
+
+        try {
+            propietarioServicio.registrar(imagen, nombre, direccion, telefono, email, password, password2);
+            modelo.put("exito", "Propietario registrado correctamente");
+            return "menu.html";
+
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+            modelo.put("direccion", direccion);
+            modelo.put("telefono", telefono);
+            return "publicaTuEspacio.html";
+        }
     }
 
 
