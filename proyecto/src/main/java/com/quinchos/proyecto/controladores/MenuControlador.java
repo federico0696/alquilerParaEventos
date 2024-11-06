@@ -112,6 +112,10 @@ public class MenuControlador {
         }
     }
 
+    @GetMapping("/buscarQuinchos")
+    public String buscarQuinchos() {
+        return "buscarQuinchos.html";
+    }
 
 
 }

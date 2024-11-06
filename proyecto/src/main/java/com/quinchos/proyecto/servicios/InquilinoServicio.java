@@ -67,6 +67,32 @@ public class InquilinoServicio {
 
     }
 
+    @Transactional
+    public void modificar(MultipartFile imagen, String nombre, String telefono, String email, String password, String password2) throws MiException{
+
+        validar(nombre, telefono, email, password, password2);
+
+        Path directorioImagenes = Paths.get("src/main/resources/static/img");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Inquilino inquilino = new Inquilino();
+
+        inquilino.setNombre(nombre);
+        inquilino.setTelefono(telefono);
+        inquilino.setEmail(email);
+        inquilino.setRol(Rol.INQUILINO);
+        inquilino.setImagen("/img/" + imagen.getOriginalFilename());
+
+        inquilinoRepositorio.save(inquilino);
+
+    }
 
 
 
