@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.excepciones.MiException;
-import com.quinchos.proyecto.servicios.AdministradorServicio;
-import com.quinchos.proyecto.servicios.InquilinoServicio;
-import com.quinchos.proyecto.servicios.PropietarioServicio;
+
+import com.quinchos.proyecto.servicios.UsuarioServicio;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,18 +20,13 @@ import jakarta.servlet.http.HttpSession;
 public class MenuControlador {
 
     @Autowired
-    private AdministradorServicio administradorServicio;
-
-    @Autowired
-    private InquilinoServicio inquilinoServicio;
-
-    @Autowired
-    private PropietarioServicio propietarioServicio;
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/")
     public String menu() {
         return "menu.html";
     }
+
 
     @PostMapping("/registroInquilino")
     public String registroInquilino(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono,
@@ -41,9 +35,9 @@ public class MenuControlador {
             @RequestParam(required = false) MultipartFile imagen) {
 
         try {
-            inquilinoServicio.registrar(imagen, nombre, telefono, email, password, password2);
+            usuarioServicio.registrarInquilino(imagen, nombre, telefono, email, password, password2);
             modelo.put("exito", "Inquilino registrado correctamente");
-            return "menu.html";
+            return "login.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -63,6 +57,7 @@ public class MenuControlador {
         return "login.html";
     }
 
+
     @GetMapping("/publicaTuEspacio")
     public String publicaTuEspacio() {
 
@@ -77,9 +72,9 @@ public class MenuControlador {
             @RequestParam(required = false) MultipartFile imagen) {
 
         try {
-            propietarioServicio.registrar(imagen, nombre, direccion, telefono, email, password, password2);
+            usuarioServicio.registrarPropietario(imagen, nombre, direccion, telefono, email, password, password2);
             modelo.put("exito", "Propietario registrado correctamente");
-            return "menu.html";
+            return "login.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -94,6 +89,17 @@ public class MenuControlador {
     @GetMapping("/buscarQuinchos")
     public String buscarQuinchos() {
         return "buscarQuinchos.html";
+    }
+    
+
+    @GetMapping("/registroInmueble")
+    public String registroInmueble() {
+        return "registroInmueble.html";
+    }
+
+    @PostMapping("/registroInmueble")
+    public String registrInmueble() {
+        return "";
     }
 
 }
