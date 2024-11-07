@@ -4,23 +4,35 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.entidades.Inquilino;
+import com.quinchos.proyecto.entidades.Propietario;
 import com.quinchos.proyecto.enumeraciones.Rol;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.repositorios.InquilinoRepositorio;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-public class InquilinoServicio {
+public class InquilinoServicio implements UserDetailsService{
     
     @Autowired
-    private InquilinoRepositorio inquilinoRepositorio;
+    private InquilinoRepositorio inquilinoRepositorio ;
 
     private void validar(String nombre, String telefono, String email, String password, String password2) throws MiException {
         if (nombre.isEmpty() || nombre == null) {
@@ -60,6 +72,7 @@ public class InquilinoServicio {
         inquilino.setNombre(nombre);
         inquilino.setTelefono(telefono);
         inquilino.setEmail(email);
+        inquilino.setPassword(password);
         inquilino.setRol(Rol.INQUILINO);
         inquilino.setImagen("/img/" + imagen.getOriginalFilename());
 
@@ -92,6 +105,30 @@ public class InquilinoServicio {
 
         inquilinoRepositorio.save(inquilino);
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            Inquilino inquilino = inquilinoRepositorio.buscarPorEmail(email);
+
+        if (inquilino != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + inquilino.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("usuariosession", inquilino);
+
+            return new User(inquilino.getEmail(), inquilino.getPassword(), permisos);
+        } else {
+            return null;
+        }
     }
 
 

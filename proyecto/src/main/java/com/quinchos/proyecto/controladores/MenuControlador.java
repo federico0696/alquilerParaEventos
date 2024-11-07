@@ -43,7 +43,7 @@ public class MenuControlador {
         try {
             inquilinoServicio.registrar(imagen, nombre, telefono, email, password, password2);
             modelo.put("exito", "Inquilino registrado correctamente");
-            return "menu.html";
+            return "login.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -79,7 +79,7 @@ public class MenuControlador {
         try {
             propietarioServicio.registrar(imagen, nombre, direccion, telefono, email, password, password2);
             modelo.put("exito", "Propietario registrado correctamente");
-            return "menu.html";
+            return "login.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -94,6 +94,16 @@ public class MenuControlador {
     @GetMapping("/buscarQuinchos")
     public String buscarQuinchos() {
         return "buscarQuinchos.html";
+    }
+
+    @GetMapping("/registroInmueble")
+    public String registroInmueble() {
+        return "registroInmueble.html";
+    }
+
+    @PostMapping("/registroInmueble")
+    public String registrInmueble() {
+        return "";
     }
 
 }
