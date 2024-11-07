@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Quincho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/registroInmueble.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registar Inmueble</h2>
+
+        <form action="/registroInmueble" method="post">
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <div class="input-container">
+                    <select id="categoria" name="categoria">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="familiar">Boda</option>
+                        <option value="corporativo">Empresarial</option>
+                        <option value="evento">Fiesta</option>
+                        <option value="evento">Reunión</option>
+                    </select>
+                    <input type="text" placeholder="Otra categoría" name="categoria_otro">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ubicacion">Ubicación:</label>
+                <div class="input-container">
+                    <select id="ubicacion" name="ubicacion">
+                        <option value="">Selecciona una ubicación</option>
+                        <option value="centro">Godoy Cruz</option>
+                        <option value="norte">Guaymallen</option>
+                        <option value="sur">Lujan</option>
+                        <option value="este">Las Heras</option>
+                        
+                    </select>
+                    <input type="text" placeholder="Otra ubicación" name="ubicacion_otro">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="capacidad">Capacidad:</label>
+                <div class="input-container">
+                    <select id="capacidad" name="capacidad">
+                        <option value="">Selecciona la capacidad</option>
+                        <option value="10">Hasta 10 personas</option>
+                        <option value="20">Hasta 20 personas</option>
+                        <option value="50">Hasta 50 personas</option>
+                        <option value="100">Hasta 100 personas</option>
+                        <option value="200">Más de 100 personas</option>
+                    </select>
+                    <input type="number" placeholder="Capacidad exacta" name="capacidad_exacta" min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <div class="input-container">
+                    <select id="descripcion" name="descripcion">
+                        <option value="">Selecciona una descripción</option>
+                        <option value="techado">Techado</option>
+                        <option value="al aire libre">Al Aire Libre</option>
+                        <option value="con piscina">Con Piscina</option>
+                        <option value="con asador">Con Asador</option>
+                    </select>
+                    <input type="text" placeholder="Otra descripción" name="descripcion_otro">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="superficie">Superficie:</label>
+                <div class="input-container">
+                    <select id="superficie" name="superficie">
+                        <option value="">Selecciona la superficie (m²)</option>
+                        <option value="50">Hasta 50 m²</option>
+                        <option value="100">Hasta 100 m²</option>
+                        <option value="200">Hasta 200 m²</option>
+                        <option value="300">Más de 200 m²</option>
+                    </select>
+                    <input type="number" placeholder="Superficie exacta" name="superficie_exacta" min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+            </div>
+
+            <div class="form-group form-submit">
+                <button type="submit">Registrar</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
