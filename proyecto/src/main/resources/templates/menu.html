@@ -79,7 +79,8 @@
             </div>
 
             <div class="publicaTuEspacio">
-                <a href="/publicaTuEspacio" role="button">Publicar tu espacio</a>
+                <a href="/publicaTuEspacio" role="button" th:if="${session.usuariosession == null}">Publicar tu espacio</a>
+                <a href="/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
             </div>
         </div>
 

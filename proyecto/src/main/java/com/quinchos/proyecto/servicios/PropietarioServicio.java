@@ -4,9 +4,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.entidades.Propietario;
@@ -14,10 +24,11 @@ import com.quinchos.proyecto.enumeraciones.Rol;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.repositorios.PropietarioRepositorio;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-public class PropietarioServicio {
+public class PropietarioServicio implements UserDetailsService{
     
     @Autowired
     private PropietarioRepositorio propietarioRepositorio;
@@ -64,6 +75,7 @@ public class PropietarioServicio {
         propietario.setDireccion(direccion);
         propietario.setTelefono(telefono);
         propietario.setEmail(email);
+        propietario.setPassword(password);
         propietario.setRol(Rol.PROPIETARIO);
         propietario.setImagen("/img/" + imagen.getOriginalFilename());
 
@@ -71,6 +83,29 @@ public class PropietarioServicio {
 
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            Propietario propietario = propietarioRepositorio.buscarPorEmail(email);
+
+        if (propietario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + propietario.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("usuariosession", propietario);
+
+            return new User(propietario.getEmail(), propietario.getPassword(), permisos);
+        } else {
+            return null;
+        }
+    }
     
 
 
