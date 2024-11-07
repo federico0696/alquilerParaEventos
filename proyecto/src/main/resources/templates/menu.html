@@ -73,9 +73,11 @@
 
         <div class="nav">
             <div class="registro-inicioSesion">
-                <a href="/buscarQuinchos" role="button">Busca tu espacio</a>
-                <a href="/login" role="button">Iniciar sesión</a>
-                <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn">Regístrate (Inquilino)</a>
+                <a href="/buscarQuinchos" role="button" th:if="${session.usuariosession == null}">Busca tu espacio</a>
+                <a href="/buscarQuinchos" role="button" sec:authorize="hasRole('INQUILINO')">Busca tu espacio</a>
+                <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
+                <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
+                <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn" th:if="${session.usuariosession == null}">Regístrate (Inquilino)</a>
             </div>
 
             <div class="publicaTuEspacio">
@@ -116,7 +118,7 @@
         <p class="titulo">Espacios para momentos que importan</p>
         <p class="descripcion">Descubre espacios en alquiler para eventos, fiestas, bodas y reuniones en todo Mendoza
         </p>
-        <form>
+        <form th:action="@{/buscarQuinchos}" sec:authorize="!hasRole('PROPIETARIO')">
             <select name="tipoDeEvento">
                 <option value="Todas Las Categorias">Todas las categorias</option>
                 <option value="Boda">Boda</option>
