@@ -9,9 +9,11 @@ import com.quinchos.proyecto.repositorios.AdministradorRepositorio;
 @Service
 public class AdministradorServicio {
     
+    @SuppressWarnings("unused")
     @Autowired
     private AdministradorRepositorio administradorRepositorio;
 
+    @SuppressWarnings("unused")
     private void validar(String nombre, String email, String password, String password2) throws MiException {
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");

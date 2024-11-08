@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Alquiler {
     
+    @SuppressWarnings("deprecation")
     @Id
     @GeneratedValue (generator = "uuid") 
     @GenericGenerator (name ="uuid", strategy = "uuid2")

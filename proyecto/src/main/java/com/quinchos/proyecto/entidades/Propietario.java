@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Propietario {
 
+    @SuppressWarnings("deprecation")
     @Id
     @GeneratedValue (generator = "uuid") 
     @GenericGenerator (name ="uuid", strategy = "uuid2")

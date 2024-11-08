@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Inmueble {
 
+    @SuppressWarnings("deprecation")
     @Id
     @GeneratedValue (generator = "uuid") 
     @GenericGenerator (name ="uuid", strategy = "uuid2")
