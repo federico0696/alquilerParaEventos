@@ -63,6 +63,12 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> origin/main
 
     <header class="header">
         <div class="logo">
@@ -73,12 +79,22 @@
 
         <div class="nav">
             <div class="registro-inicioSesion">
+<<<<<<< HEAD
                 <a href="/proyecto/src/main/resources/templates/login.html" role="button">Iniciar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn">Regístrate (Inquilino)</a>
+=======
+                <a href="/buscarQuinchos" role="button" th:if="${session.usuariosession == null}">Busca tu espacio</a>
+                <a href="/buscarQuinchos" role="button" sec:authorize="hasRole('INQUILINO')">Busca tu espacio</a>
+                <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
+                <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
+                <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn" th:if="${session.usuariosession == null}">Regístrate (Inquilino)</a>
+                <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i class="bi bi-person-fill"></i>Perfil</a>
+>>>>>>> origin/main
             </div>
 
             <div class="publicaTuEspacio">
-                <a href="/publicaTuEspacio" role="button">Publicar tu espacio</a>
+                <a href="/publicaTuEspacio" role="button" th:if="${session.usuariosession == null}">Publicar tu espacio</a>
+                <a href="/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
             </div>
         </div>
 
@@ -114,7 +130,11 @@
         <p class="titulo">Espacios para momentos que importan</p>
         <p class="descripcion">Descubre espacios en alquiler para eventos, fiestas, bodas y reuniones en todo Mendoza
         </p>
+<<<<<<< HEAD
         <form>
+=======
+        <form th:action="@{/buscarQuinchos}" sec:authorize="!hasRole('PROPIETARIO')">
+>>>>>>> origin/main
             <select name="tipoDeEvento">
                 <option value="Todas Las Categorias">Todas las categorias</option>
                 <option value="Boda">Boda</option>
@@ -131,8 +151,14 @@
             </select>
             <button>Buscar</button>
         </form>
+        
+        <a class="publicaTuEspacioBoton" href="/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">¡Publica tu espacio aqui!</a>
     </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
     <div class="seccion2">
         <div class="imagenesPrincipales">
             <div class="fiesta">

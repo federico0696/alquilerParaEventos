@@ -4,6 +4,7 @@ document.getElementById('showPassword').addEventListener('change', function() {
     passwordField.type = this.checked ? 'text' : 'password';
 });
 
+<<<<<<< HEAD
 // Validación de campos vacíos
 document.querySelector('.loginForm').addEventListener('submit', function(event) {
     const email = document.getElementById('email').value.trim();  // Asegúrate de que el ID sea 'email'
@@ -43,4 +44,7 @@ loginOverlay.addEventListener('click', (event) => {
         closeModal();
     }
 });
+=======
+
+>>>>>>> origin/main
 
