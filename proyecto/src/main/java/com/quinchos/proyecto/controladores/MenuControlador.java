@@ -90,16 +90,15 @@ public class MenuControlador {
     public String buscarQuinchos() {
         return "buscarQuinchos.html";
     }
+
+    @PostMapping("/buscarQuinchos")
+    public String datosParaBuscarQuinchos() {
+              
+        return "quinchos.html";
+    }
+
+    
     
 
-    @GetMapping("/registroInmueble")
-    public String registroInmueble() {
-        return "registroInmueble.html";
-    }
-
-    @PostMapping("/registroInmueble")
-    public String registrInmueble() {
-        return "";
-    }
 
 }

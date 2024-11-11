@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO ALQUILER DE QUINCHOS PARA FIESTAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/quinchos.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="Logo" />
+            </a>
+        </div>
+
+        <div class="nav">
+            <div class="registro-inicioSesion">
+                <a href="/buscarQuinchos" role="button" th:if="${session.usuariosession == null}">Busca tu espacio</a>
+                <a href="/buscarQuinchos" role="button" sec:authorize="hasRole('INQUILINO')">Busca tu espacio</a>
+                <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
+                <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
+                <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i class="bi bi-person-fill"></i>Perfil</a>
+            </div>
+
+            <div class="publicaTuEspacio">
+                <a href="/publicaTuEspacio" role="button" th:if="${session.usuariosession == null}">Publicar tu espacio</a>
+                <a href="/inmueble/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+    <div class="contenedor">
+        <div class="contenedor-inmuebles">
+            <div class="inmueble" th:each="inmueble : ${inmuebles}">
+                <div class="inmueble-imagen">
+                    <img th:src="${inmueble.imagen}" alt="Imagen de inmueble">
+                </div>
+                <div class="inmueble-detalles">
+                    <h4 class="inmueble-titulo" th:text="${inmueble.nombre}"></h4>
+                    <p class="inmueble-descripcion">
+                        <span>descripcion:<span th:text="${inmueble.descripcion}"></span></span>
+                    </p>
+                    <p class="inmueble-precio">
+                        <span>precio por dia:$<span th:text="${inmueble.precio}"></span></span>
+                    </p>
+                    <button class="inmueble-entrar" th:attr="data-id=${inmueble.id}">Ver inmueble</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/js/quinchos.js"></script>
+</body>
+
+</html>

@@ -23,6 +23,8 @@ public class Inmueble {
 
     private String categoria;
 
+    private String localidad;
+
     private String ubicacion;
 
     private Integer capacidad;
@@ -38,6 +40,8 @@ public class Inmueble {
     private String[] Servicios;
 
     private String[] comentario;
+
+    private Integer precioDia;
 
     @ManyToOne
     private Propietario propietario;
@@ -156,6 +160,22 @@ public class Inmueble {
 
     public void setIdAlquiler(String idAlquiler) {
         this.idAlquiler = idAlquiler;
+    }
+
+    public Integer getPrecioDia() {
+        return precioDia;
+    }
+
+    public void setPrecioDia(Integer precioDia) {
+        this.precioDia = precioDia;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
     }
 
 
