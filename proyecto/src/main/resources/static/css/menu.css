@@ -247,6 +247,27 @@ form select option, form input[type="number"]::placeholder {
     color: #999;
 }
 
+.publicaTuEspacioBoton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    padding: 10px 5px 10px 5px;
+    font-size: 22px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    background-color: #14a387;
+    border: 1px white solid;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.publicaTuEspacioBoton:hover{
+    background-color: #0e7f65;
+}
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/

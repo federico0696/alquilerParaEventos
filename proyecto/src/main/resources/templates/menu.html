@@ -64,6 +64,9 @@
 
 
 
+
+
+
     <header class="header">
         <div class="logo">
             <a th:href="@{/}">
@@ -78,6 +81,7 @@
                 <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
                 <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn" th:if="${session.usuariosession == null}">Regístrate (Inquilino)</a>
+                <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i class="bi bi-person-fill"></i>Perfil</a>
             </div>
 
             <div class="publicaTuEspacio">
@@ -135,7 +139,10 @@
             </select>
             <button>Buscar</button>
         </form>
+        
+        <a class="publicaTuEspacioBoton" href="/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">¡Publica tu espacio aqui!</a>
     </div>
+
 
     <div class="seccion2">
         <div class="imagenesPrincipales">
