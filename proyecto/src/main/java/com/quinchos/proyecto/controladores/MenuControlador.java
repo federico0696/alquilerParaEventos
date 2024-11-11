@@ -30,9 +30,9 @@ public class MenuControlador {
 
     @PostMapping("/registroInquilino")
     public String registroInquilino(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
-            @RequestParam(required = false) MultipartFile imagen) {
+                                    @RequestParam("email") String email,
+                                    @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
+                                    @RequestParam(required = false) MultipartFile imagen) {
 
         try {
             usuarioServicio.registrarInquilino(imagen, nombre, telefono, email, password, password2);
@@ -66,10 +66,10 @@ public class MenuControlador {
 
     @PostMapping("/publicaTuEspacio")
     public String registroPropietario(@RequestParam("nombre") String nombre,
-            @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
-            @RequestParam(required = false) MultipartFile imagen) {
+                                      @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono,
+                                      @RequestParam("email") String email,
+                                      @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
+                                      @RequestParam(required = false) MultipartFile imagen) {
 
         try {
             usuarioServicio.registrarPropietario(imagen, nombre, direccion, telefono, email, password, password2);
@@ -90,16 +90,7 @@ public class MenuControlador {
     public String buscarQuinchos() {
         return "buscarQuinchos.html";
     }
+}
     
 
-    @GetMapping("/registroInmueble")
-    public String registroInmueble() {
-        return "registroInmueble.html";
-    }
 
-    @PostMapping("/registroInmueble")
-    public String registrInmueble() {
-        return "";
-    }
-
-}
