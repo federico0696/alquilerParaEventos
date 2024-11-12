@@ -50,33 +50,33 @@ public class MenuControlador {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INICIO DE SISON//
 
-    // @GetMapping("/login")
-    // public String login(@RequestParam(required = false) String error, ModelMap
-    // modelo) {
-    // if (error != null) {
-    // modelo.put("error", "Usuario o Contraseña inválidos!");
-    // }
-    // return "login.html";
-    // }
-
-    @PostMapping("/logincheck")
-    public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
-        boolean autenticado = verificarCredenciales(email, password); // Llamado para autenticar el usuario (email) y su password //
-
-        if (autenticado) {
-            return "redirect:/menu"; // Redirigir a la página principal (menu.html) si la autenticación es correcta//
-        } else {
-            modelo.put("error", "Usuario o Contraseña inválidos!");
-            return "login.html"; // Si no pasa la autenticación entonces vuelve a la página de inicio de sesión con el mensaje de error//
-        }
+    @GetMapping("/login")
+    public String login(@RequestParam(required = false) String error, ModelMap
+    modelo) {
+    if (error != null) {
+    modelo.put("error", "Usuario o Contraseña inválidos!");
+    }
+    return "login.html";
     }
 
-    // Ejemplo de método de autenticación
-    private boolean verificarCredenciales(String email, String password) {
-        // Implementa aquí la lógica de autenticación, como validación en la base de
-        // datos
-        return true; // Cambia esto según el resultado de la autenticación
-    }
+    // @PostMapping("/logincheck")
+    // public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
+    //     boolean autenticado = verificarCredenciales(email, password); // Llamado para autenticar el usuario (email) y su password //
+
+    //     if (autenticado) {
+    //         return "redirect:/menu"; // Redirigir a la página principal (menu.html) si la autenticación es correcta//
+    //     } else {
+    //         modelo.put("error", "Usuario o Contraseña inválidos!");
+    //         return "login.html"; // Si no pasa la autenticación entonces vuelve a la página de inicio de sesión con el mensaje de error//
+    //     }
+    // }
+
+    // // Ejemplo de método de autenticación
+    // private boolean verificarCredenciales(String email, String password) {
+    //     // Implementa aquí la lógica de autenticación, como validación en la base de
+    //     // datos
+    //     return true; // Cambia esto según el resultado de la autenticación
+    // }
 
     @GetMapping("/publicaTuEspacio")
     public String publicaTuEspacio() {
