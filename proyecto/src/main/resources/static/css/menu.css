@@ -12,6 +12,7 @@ body{
     background-position: center;
 }
 
+/*Encabezado*/
 .header{
     height: 55px;
     width: 100%;
@@ -483,7 +484,8 @@ footer {
 }
 
 .footer-links a:hover {
-    color: #9deb0c; /* Color al paso del cursor */
+    color: #f8fafa; /* Color al paso del cursor */
+    transform: scale(2.0); /* Aumenta el tamaño al pasar el cursor */
 }
 
 .social-media {
@@ -499,13 +501,13 @@ footer {
 }
 
 .social-icon:hover {
-    color: #a7ebdf; /* Color de los iconos al pasar el cursor */
+    color: #fafcfb; /* Color de los iconos al pasar el cursor */
     transform: scale(1.5); /* Aumenta el tamaño al pasar el cursor */
 }
 
 p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
     width: 100%;
     margin-top: 10px;
