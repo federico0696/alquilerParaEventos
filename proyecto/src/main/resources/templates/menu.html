@@ -78,7 +78,8 @@
                 <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
                 <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn" th:if="${session.usuariosession == null}">Regístrate (Inquilino)</a>
-                <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i class="bi bi-person-fill"></i>Perfil</a>
+                <a href="/perfil/perfilUsuarioInquilino" role="button" sec:authorize="hasRole('INQUILINO')"><i class="bi bi-person-fill"></i>Perfil</a>
+                <a href="/perfil/perfilUsuarioPropietario" role="button" sec:authorize="hasRole('PROPIETARIO')"><i class="bi bi-person-fill"></i>Perfil</a>
             </div>
 
             <div class="publicaTuEspacio">

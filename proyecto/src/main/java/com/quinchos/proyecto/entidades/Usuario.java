@@ -14,19 +14,16 @@ import jakarta.persistence.Id;
 public class Usuario {
     
     @Id 
-    @GeneratedValue (generator = "uuid")
-    @GenericGenerator (name = "uuid", strategy = "uuid2" )
     private String id;
 
     private String email;
     private String password;
-
+    
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     public Usuario() {
     }
-
 
     public String getId() {
         return id;
