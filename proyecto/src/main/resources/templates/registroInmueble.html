@@ -15,7 +15,7 @@
     <div class="form-container">
         <h2>Registra tu Inmueble</h2>
 
-        <form action="/registroInmueble" method="post">
+        <form action="/inmueble/registroInmueble" method="POST" enctype="multipart/form-data">
 
             <div class="form-group1">
                 <label for="categoria">Categoría:</label>
@@ -28,9 +28,9 @@
                         <option value="evento">Reunión</option>
                     </select>
                 </div>
-                <label for="categoria">Departamento:</label>
+                <label for="categoria">Localidad:</label>
                 <div class="input-container1">
-                    <select id="categoria" name="departamento">
+                    <select id="categoria" name="localidad">
                         <option value="GODOY CRUZ">Godoy Cruz</option>
                         <option value="GUAYMALLEN">Guaymallen</option>
                         <option value="LUJAN">Lujan</option>
@@ -62,34 +62,34 @@
 
                 <label for="imagen">Imagen:</label>
                 <div class="input-container5">
-                    <input type="file" id="imagen" name="imagen" accept="image/*">
+                    <input type="file" id="imagen" name="imagen" >
                 </div>
             </div>
 
             <div class="form-group3">
                 <div class="serviciosConteiner">
-                    <label for="descripcion">Servicios:</label>
+                    <label for="servicios">Servicios:</label>
                     <div class="servicios">
-                        <label for="descripcion">Musica:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Fotografia:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">WiFi:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Cochera:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Catering:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Seguridad:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Iluminacion:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Vajilla:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Heladera:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Freezer:</label>
-                        <input type="checkbox" name="servicios">
+                        <label for="servicios">Musica:</label>
+                        <input type="checkbox" name="servicios[]" value="Musica">
+                        <label for="servicios">Fotografia:</label>
+                        <input type="checkbox" name="servicios[]" value="Fotografia">
+                        <label for="servicios">WiFi:</label>
+                        <input type="checkbox" name="servicios[]" value="WiFi">
+                        <label for="servicios">Cochera:</label>
+                        <input type="checkbox" name="servicios[]" value="Cochera">
+                        <label for="servicios">Catering:</label>
+                        <input type="checkbox" name="servicios[]" value="Catering">
+                        <label for="servicios">Seguridad:</label>
+                        <input type="checkbox" name="servicios[]" value="Seguridad">
+                        <label for="servicios">Iluminacion:</label>
+                        <input type="checkbox" name="servicios[]" value="Iluminacion">
+                        <label for="servicios">Vajilla:</label>
+                        <input type="checkbox" name="servicios[]" value="Vajilla">
+                        <label for="servicios">Heladera:</label>
+                        <input type="checkbox" name="servicios[]" value="Heladera">
+                        <label for="servicios">Freezer:</label>
+                        <input type="checkbox" name="servicios[]" value="Freezer">
                     </div>
                 </div>
 

@@ -104,8 +104,6 @@ public class PerfilControlador {
         return "perfilUsuario.html";
     }
 
-    
-
     @PostMapping("/cambiarNombreDomicilioPropietario")
     public String cambiarNombreDomicilioPropietario(@RequestParam(required = false) String domicilio, HttpSession session, ModelMap modelo) throws MiException {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
