@@ -10,24 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.excepciones.MiException;
-import com.quinchos.proyecto.servicios.AdministradorServicio;
-import com.quinchos.proyecto.servicios.InquilinoServicio;
-import com.quinchos.proyecto.servicios.PropietarioServicio;
+
+import com.quinchos.proyecto.servicios.UsuarioServicio;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
 public class MenuControlador {
-    
-    @Autowired
-    private AdministradorServicio administradorServicio;
 
     @Autowired
-    private InquilinoServicio inquilinoServicio ;
-
-    @Autowired
-    private PropietarioServicio propietarioServicio;
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/")
     public String menu() {
@@ -35,54 +28,26 @@ public class MenuControlador {
     }
 
 
-    @GetMapping("/registrarInquilino")
-    public String registrarInquilino() {
-        return "registroInquilino.html";
-    }
-
     @PostMapping("/registroInquilino")
-    public String registroInquilino(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono, @RequestParam("email") String email,
+    public String registroInquilino(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono,
+            @RequestParam("email") String email,
             @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
             @RequestParam(required = false) MultipartFile imagen) {
 
         try {
-            inquilinoServicio.registrar(imagen, nombre, telefono, email, password, password2);
+            usuarioServicio.registrarInquilino(imagen, nombre, telefono, email, password, password2);
             modelo.put("exito", "Inquilino registrado correctamente");
-            return "menu.html";
-
-        } catch (MiException ex) {
-            modelo.put("error", ex.getMessage());
-            modelo.put("nombre", nombre);
-            modelo.put("email", email);
-            modelo.put("telefono", telefono);
-            return "registroInquilino.html";
-        }
-    }
-
-    @GetMapping("/registrarPropietario")
-    public String registrarPropietario() {
-        return "registroPropietario.html";
-    }
-
-    @PostMapping("/registroPropietario")
-    public String registroPropietario(@RequestParam("nombre") String nombre, @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono, @RequestParam("email") String email,
-            @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
-            @RequestParam(required = false) MultipartFile imagen) {
-
-        try {
-            propietarioServicio.registrar(imagen, nombre, direccion, telefono, email, password, password2);
-            modelo.put("exito", "Propietario registrado correctamente");
             return "login.html";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
-            modelo.put("direccion", direccion);
             modelo.put("telefono", telefono);
-            return "registroPropietario.html";
+            return "menu.html";
         }
     }
+
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
@@ -92,12 +57,48 @@ public class MenuControlador {
         return "login.html";
     }
 
+
     @GetMapping("/publicaTuEspacio")
     public String publicaTuEspacio() {
-        
+
         return "publicaTuEspacio.html";
     }
 
+    @PostMapping("/publicaTuEspacio")
+    public String registroPropietario(@RequestParam("nombre") String nombre,
+            @RequestParam("direccion") String direccion, @RequestParam("telefono") String telefono,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password, @RequestParam("password2") String password2, ModelMap modelo,
+            @RequestParam(required = false) MultipartFile imagen) {
+
+        try {
+            usuarioServicio.registrarPropietario(imagen, nombre, direccion, telefono, email, password, password2);
+            modelo.put("exito", "Propietario registrado correctamente");
+            return "login.html";
+
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+            modelo.put("direccion", direccion);
+            modelo.put("telefono", telefono);
+            return "publicaTuEspacio.html";
+        }
+    }
+
+    @GetMapping("/buscarQuinchos")
+    public String buscarQuinchos() {
+        return "buscarQuinchos.html";
+    }
+
+    @PostMapping("/buscarQuinchos")
+    public String datosParaBuscarQuinchos() {
+              
+        return "quinchos.html";
+    }
+
+    
+    
 
 
 }

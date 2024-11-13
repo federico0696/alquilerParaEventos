@@ -1,0 +1,106 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+}
+
+.header{
+    height: 55px;
+    width: 100%;
+    background-color: #1ABC9C;
+    display: flex;
+    justify-content: space-around;
+    gap: 180px;
+    align-items: center;
+    border-bottom: rgb(0, 0, 0) 1px solid;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: -100px;
+}
+
+.logo img {
+    transition: all 0.7s;
+    width: 100px;
+    height: 70px;
+    transform: rotate(17deg);
+    object-fit: cover;
+}
+
+.logo:hover img{
+    transform: scale(1.1);
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.registro-inicioSesion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.registro-inicioSesion :hover{
+    background-color: #14a387;
+}
+
+.registro-inicioSesion a{
+    font-family: "Open Sans";
+    font-size: 0.8125rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 18px 15px 18px 15px;
+}
+
+.publicaTuEspacio{
+    margin-left: 20px;
+}
+
+.publicaTuEspacio :hover{
+    background-color: #14a387;
+}
+
+.publicaTuEspacio a{
+    border: white 1px solid;
+    border-radius: 3px;
+    font-family: "Open Sans";
+    font-size: 0.8125rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 6px 20px 6px 20px;
+}
+
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
