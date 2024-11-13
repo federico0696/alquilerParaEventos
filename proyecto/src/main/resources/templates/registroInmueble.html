@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 9a595412b517046f3fca13342e53334fac63cdaf
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +15,7 @@
     <div class="form-container">
         <h2>Registra tu Inmueble</h2>
 
-        <form class="modal-form" th:action="@{/inmueble/registroInmueble}" method="post" enctype="multipart/form-data">
+        <form action="/inmueble/registroInmueble" method="POST" enctype="multipart/form-data">
 
             <div class="form-group1">
                 <label for="categoria">Categoría:</label>
@@ -32,9 +28,9 @@
                         <option value="evento">Reunión</option>
                     </select>
                 </div>
-                <label for="localidad">Departamento:</label>
+                <label for="categoria">Localidad:</label>
                 <div class="input-container1">
-                    <select id="departamento" name="localidad">
+                    <select id="categoria" name="localidad">
                         <option value="GODOY CRUZ">Godoy Cruz</option>
                         <option value="GUAYMALLEN">Guaymallen</option>
                         <option value="LUJAN">Lujan</option>
@@ -59,41 +55,41 @@
                         placeholder="Superficie exacta o aproximada">
                 </div>
 
-                <label for="precioDia">Precio por dia $ (dólares):</label>
+                <label for="superficie">Precio por dia $ (dólares):</label>
                 <div class="input-container4">
-                    <input type="number" name="precioDia" min="1" max="99999" value="1">
+                    <input type="number" name="precio" min="1" max="99999" value="1">
                 </div>
 
                 <label for="imagen">Imagen:</label>
                 <div class="input-container5">
-                    <input type="file" id="imagen" name="imagen" accept="image/*">
+                    <input type="file" id="imagen" name="imagen" >
                 </div>
             </div>
 
             <div class="form-group3">
                 <div class="serviciosConteiner">
-                    <label for="descripcion">Servicios:</label>
+                    <label for="servicios">Servicios:</label>
                     <div class="servicios">
-                        <label for="descripcion">Musica:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Fotografia:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">WiFi:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Cochera:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Catering:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Seguridad:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Iluminacion:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Vajilla:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Heladera:</label>
-                        <input type="checkbox" name="servicios">
-                        <label for="descripcion">Freezer:</label>
-                        <input type="checkbox" name="servicios">
+                        <label for="servicios">Musica:</label>
+                        <input type="checkbox" name="servicios[]" value="Musica">
+                        <label for="servicios">Fotografia:</label>
+                        <input type="checkbox" name="servicios[]" value="Fotografia">
+                        <label for="servicios">WiFi:</label>
+                        <input type="checkbox" name="servicios[]" value="WiFi">
+                        <label for="servicios">Cochera:</label>
+                        <input type="checkbox" name="servicios[]" value="Cochera">
+                        <label for="servicios">Catering:</label>
+                        <input type="checkbox" name="servicios[]" value="Catering">
+                        <label for="servicios">Seguridad:</label>
+                        <input type="checkbox" name="servicios[]" value="Seguridad">
+                        <label for="servicios">Iluminacion:</label>
+                        <input type="checkbox" name="servicios[]" value="Iluminacion">
+                        <label for="servicios">Vajilla:</label>
+                        <input type="checkbox" name="servicios[]" value="Vajilla">
+                        <label for="servicios">Heladera:</label>
+                        <input type="checkbox" name="servicios[]" value="Heladera">
+                        <label for="servicios">Freezer:</label>
+                        <input type="checkbox" name="servicios[]" value="Freezer">
                     </div>
                 </div>
 
@@ -113,8 +109,4 @@
         </form>
     </div>
 
-<<<<<<< HEAD
 </body>
-=======
-</body>
->>>>>>> 9a595412b517046f3fca13342e53334fac63cdaf
