@@ -1,1 +1,119 @@
-<h1>este es el perfil individual de cada usuario con todos sus datos</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO ALQUILER DE QUINCHOS PARA FIESTAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/perfilUsuario.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="Logo" />
+            </a>
+        </div>
+
+        <div class="imagen-usuario" sec:authorize="hasRole('PROPIETARIO')">
+            <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
+            <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilPropietario}" method="POST"
+                enctype="multipart/form-data">
+                <label for="archivo">
+                    <i class="bi bi-camera">
+                        <p>cambiar foto de perfil</p>
+                    </i>
+                </label>
+                <input type="file" id="archivo" name="imagen" style="display: none;">
+            </form>
+        </div>
+        <div class="imagen-usuario" sec:authorize="hasRole('INQUILINO')">
+            <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
+            <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilInquilino}" method="POST"
+                enctype="multipart/form-data">
+                <label for="archivo">
+                    <i class="bi bi-camera">
+                        <p>cambiar foto de perfil</p>
+                    </i>
+                </label>
+                <input type="file" id="archivo" name="imagen" style="display: none;">
+            </form>
+        </div>
+
+        <div class="nombre-usuario" sec:authorize="hasRole('PROPIETARIO')">
+            <p class="nombre" th:text="${usuario.nombre}"></p>
+            <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioPropietario}" method="POST">
+                <i class="bi bi-feather">
+                    <p class="editarNombre">editar nombre</p>
+                </i>
+                <input type="text" id="nombre" name="nombre" style="display: none;">
+                <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
+            </form>
+        </div>
+        <div class="nombre-usuario" sec:authorize="hasRole('INQUILINO')">
+            <p class="nombre" th:text="${usuario.nombre}"></p>
+            <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioInquilino}" method="POST">
+                <i class="bi bi-feather">
+                    <p class="editarNombre">editar nombre</p>
+                </i>
+                <input type="text" id="nombre" name="nombre" style="display: none;">
+                <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
+            </form>
+        </div>
+
+
+        <div class="nav">
+            <div class="registro-inicioSesion">
+                <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
+                <a href="/" role="button" th:if="${session.usuariosession}">Menu</a>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+    <div class="nombre-domicilio" sec:authorize="hasRole('PROPIETARIO')">
+        <p class="domicilio" th:text="'Domicilio: ' + ${usuario.direccion}"></p>
+        <form th:action="@{/perfil/cambiarNombreDomicilioPropietario}" method="POST">
+            <i class="bi bi-feather editDomicilio">
+                <p class="editarDomicilio">editar domicilio</p>
+            </i>
+            <input type="text" id="domicilio" name="domicilio" style="display: none;">
+            <button type="submit" id="botonDomicilio" style="display: none;">Guardar</button>
+        </form>
+    </div>
+
+    <div class="nombre-email" sec:authorize="hasRole('INQUILINO')">
+        <p class="email" th:text="'Email: ' + ${usuario.email}"></p>
+        <form th:action="@{/perfil/cambiarNombreEmailInquilino}" method="POST">
+            <i class="bi bi-feather editEmailInquilino">
+                <p class="editarEmailInquilino">editar email</p>
+            </i>
+            <input type="text" id="emailInquilino" name="email" style="display: none;">
+            <button type="submit" id="botonEmailInquilino" style="display: none;">Guardar</button>
+        </form>
+    </div>
+    <div class="nombre-email" sec:authorize="hasRole('PROPIETARIO')">
+        <p class="email" th:text="'Email: ' + ${usuario.email}"></p>
+        <form th:action="@{/perfil/cambiarNombreEmailPropietario}" method="POST">
+            <i class="bi bi-feather editEmailPropietario">
+                <p class="editarEmailPropietario">editar email</p>
+            </i>
+            <input type="text" id="emailPropietario" name="email" style="display: none;">
+            <button type="submit" id="botonEmailPropietario" style="display: none;">Guardar</button>
+        </form>
+    </div>
+    
+
+
+    <script src="/js/perfilUsuario.js"></script>
+</body>
+
+</html>

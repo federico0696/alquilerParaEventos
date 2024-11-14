@@ -28,14 +28,24 @@
                 <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn"
                     th:if="${session.usuariosession == null}">Regístrate (Inquilino)</a>
+<<<<<<< HEAD
                 <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i
+=======
+                <a href="/perfil/perfilUsuarioInquilino" role="button" sec:authorize="hasRole('INQUILINO')"><i
+                        class="bi bi-person-fill"></i>Perfil</a>
+                <a href="/perfil/perfilUsuarioPropietario" role="button" sec:authorize="hasRole('PROPIETARIO')"><i
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
                         class="bi bi-person-fill"></i>Perfil</a>
             </div>
 
             <div class="publicaTuEspacio">
                 <a href="/publicaTuEspacio" role="button" th:if="${session.usuariosession == null}">Publicar tu
                     espacio</a>
+<<<<<<< HEAD
                 <a href="/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
+=======
+                <a href="/inmueble/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
             </div>
         </div>
 
@@ -96,7 +106,11 @@
 
 
     <div class="seccion1">
+<<<<<<< HEAD
         <div  class="titulo">
+=======
+        <div class="titulo">
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
             <h1>El Sitio Perfecto Para Tú Evento en la Provincia de Mendoza</h1>
             <!-- <p class="descripcion">Descubre espacios en alquiler para eventos, fiestas, bodas y reuniones en todo Mendoza
             </p> -->
@@ -133,7 +147,11 @@
             </form>
         </div>
 
+<<<<<<< HEAD
         <a class="publicaTuEspacioBoton" href="/registroInmueble" role="button"
+=======
+        <a class="publicaTuEspacioBoton" href="/inmueble/registroInmueble" role="button"
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
             sec:authorize="hasRole('PROPIETARIO')">¡Publica tu espacio aqui!</a>
     </div>
 

@@ -1,4 +1,3 @@
-
 *{
     margin: 0;
     padding: 0;
@@ -210,6 +209,7 @@ form {
     border-radius: 8px;
     background-color: #0000009d;
     gap: 10px;
+    z-index: 0;
 }
 
 /* Estilos para los elementos select e input */
@@ -354,6 +354,7 @@ form select option, form input[type="number"]::placeholder {
     width: 100%;
     height: 100vh;
     background-color: rgba(250, 248, 248, 0.5);
+    z-index: 1;
 }
 
 .contenedorForm {
@@ -484,8 +485,12 @@ footer {
 }
 
 .footer-links a:hover {
+<<<<<<< HEAD
     color: #f8fafa; /* Color al paso del cursor */
     transform: scale(2.0); /* Aumenta el tamaño al pasar el cursor */
+=======
+    color: #9deb0c; /* Color al paso del cursor */
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
 }
 
 .social-media {
@@ -501,13 +506,21 @@ footer {
 }
 
 .social-icon:hover {
+<<<<<<< HEAD
     color: #fafcfb; /* Color de los iconos al pasar el cursor */
+=======
+    color: #a7ebdf; /* Color de los iconos al pasar el cursor */
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
     transform: scale(1.5); /* Aumenta el tamaño al pasar el cursor */
 }
 
 p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+<<<<<<< HEAD
     font-size: 14px;
+=======
+    font-size: 10px;
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
     text-align: center;
     width: 100%;
     margin-top: 10px;

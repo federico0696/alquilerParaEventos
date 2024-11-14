@@ -110,15 +110,18 @@ public class MenuControlador {
     public String buscarQuinchos() {
         return "buscarQuinchos.html";
     }
+<<<<<<< HEAD
+=======
 
-    @GetMapping("/registroInmueble")
-    public String registroInmueble() {
-        return "registroInmueble.html";
+    @PostMapping("/buscarQuinchos")
+    public String datosParaBuscarQuinchos() {
+              
+        return "quinchos.html";
     }
 
-    @PostMapping("/registroInmueble")
-    public String registrInmueble() {
-        return "";
-    }
+    
+    
+>>>>>>> 95a7617556cece448cf6ab34b171fde6add92525
+
 
 }
