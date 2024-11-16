@@ -93,7 +93,8 @@ public class Usuario {
         this.activo = activo;
     }
 
-    // Sobrescribiendo equals() y hashCode() para comparar por usuarioId
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Sobrescritura de equals() y hashCode() para comparar por usuarioId
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

@@ -2,22 +2,22 @@ package com.quinchos.proyecto.entidades;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Alquiler {
-    
-    @Id
-@GeneratedValue(strategy = GenerationType.AUTO) // Hibernate manejará la generación de UUID automáticamente
-@Column(name = "alquiler_id", nullable = false, updatable = false) // Especificamos el nombre de la columna
-private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de dato
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "alquiler_id", nullable = false, updatable = false) // Nombre de la columna
+    private Long alquilerId; //
 
     // Cambié de Integer a LocalDate para representar correctamente fechas de calendario
     private LocalDate fechaInicio;
@@ -25,10 +25,21 @@ private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de 
 
     private Integer precioDia;
 
-    // Manejaremos el precio total mediante un cálculo para evitar inconsistencias
+    // El precio total es mejor hacer el cálculo para evitar inconsistencias; abajo el cálculo
+    
     public Alquiler() {
     }
 
+    @ManyToOne
+    @JoinColumn(name = "inmueble_id", nullable = false) // Foreign key en la tabla Alquiler
+    private Inmueble inmueble;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    // GETTERS Y SETTERS
+    // //////////////////////////////////////////////////////////////////////////////////////////
     public Long getAlquilerId() {
         return alquilerId;
     }
@@ -42,6 +53,9 @@ private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de 
     }
 
     public void setFechaInicio(LocalDate fechaInicio) {
+        if (this.fechaFin != null && fechaInicio.isAfter(this.fechaFin)) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser después de la fecha de fin");
+        }
         this.fechaInicio = fechaInicio;
     }
 
@@ -50,6 +64,9 @@ private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de 
     }
 
     public void setFechaFin(LocalDate fechaFin) {
+        if (this.fechaInicio != null && fechaFin.isBefore(this.fechaInicio)) {
+            throw new IllegalArgumentException("La fecha de fin no puede ser antes de la fecha de inicio");
+        }
         this.fechaFin = fechaFin;
     }
 
@@ -61,7 +78,10 @@ private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de 
         this.precioDia = precioDia;
     }
 
-    // Calcular el precio total basado en el precio por día, considerando las fechas de inicio y fin
+
+
+
+    // Calculo del precio total basado en el precio por día, considerando las fechas de inicio y fin
     public Integer getPrecioTotal() {
         if (fechaInicio != null && fechaFin != null && precioDia != null) {
             long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
@@ -70,10 +90,21 @@ private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de 
         return 0;
     }
 
+    public Inmueble getInmueble() {
+        return inmueble;
+    }
+    
+    public void setInmueble(Inmueble inmueble) {
+        this.inmueble = inmueble;
+    }
+    
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Alquiler alquiler = (Alquiler) o;
         return alquilerId.equals(alquiler.alquilerId);
     }

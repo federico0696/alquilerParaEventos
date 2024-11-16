@@ -23,10 +23,11 @@ import jakarta.validation.constraints.Positive;
 public class Inmueble {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // Permite que Hibernate maneje la generación de UUID
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "inmueble_id", nullable = false, updatable = false)
     private Long inmuebleId;
 
+    //ESTAS RELACIONES SERA IMPORTANTE VALIDAR QUE ESTEN BIEN ALINEADAS CON LA BASE DE DATOS/////////////////////
     // Relación con el propietario (Usuario con rol PROPIETARIO)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "propietario_id", nullable = false)
@@ -78,7 +79,7 @@ public class Inmueble {
     public Inmueble() {
     }
 
-    // Getters y Setters
+    // GETTERS Y SETTERS //////////////////////////////////////////////////////////////////////////////////////////
     public Long getInmuebleId() {
         return inmuebleId;
     }
@@ -191,6 +192,7 @@ public class Inmueble {
         this.precioDia = precioDia;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Queda listo para comparar objetos si es necesario
     @Override
     public boolean equals(Object o) {
