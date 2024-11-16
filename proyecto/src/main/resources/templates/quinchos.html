@@ -43,18 +43,20 @@
     <div class="contenedor">
         <div class="contenedor-inmuebles">
             <div class="inmueble" th:each="inmueble : ${inmuebles}">
+                <h4 class="inmueble-titulo" th:text="${inmueble.categoria}"></h4>
                 <div class="inmueble-imagen">
                     <img th:src="${inmueble.imagen}" alt="Imagen de inmueble">
                 </div>
                 <div class="inmueble-detalles">
-                    <h4 class="inmueble-titulo" th:text="${inmueble.nombre}"></h4>
+                    <h4 class="inmueble-titulo" th:text="${inmueble.localidad}"></h4>
+                    <h4 class="inmueble-titulo" th:text="'Capacidad: ' + ${inmueble.capacidad}"></h4>
+                    <h4 class="inmueble-titulo" th:text="'Superficie: ' + ${inmueble.superficie}"></h4>
                     <p class="inmueble-descripcion">
                         <span>descripcion:<span th:text="${inmueble.descripcion}"></span></span>
                     </p>
                     <p class="inmueble-precio">
-                        <span>precio por dia:$<span th:text="${inmueble.precio}"></span></span>
+                        <span>precio por dia:$<span th:text="${inmueble.precioDia}"></span></span>
                     </p>
-                    <button class="inmueble-entrar" th:attr="data-id=${inmueble.id}">Ver inmueble</button>
                 </div>
             </div>
         </div>
