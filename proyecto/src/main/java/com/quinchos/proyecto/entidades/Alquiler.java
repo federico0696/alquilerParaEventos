@@ -1,51 +1,55 @@
 package com.quinchos.proyecto.entidades;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Alquiler {
     
     @Id
-    @GeneratedValue (generator = "uuid") 
-    @GenericGenerator (name ="uuid", strategy = "uuid2")
-    private String idAlquiler;
+@GeneratedValue(strategy = GenerationType.AUTO) // Hibernate manejará la generación de UUID automáticamente
+@Column(name = "alquiler_id", nullable = false, updatable = false) // Especificamos el nombre de la columna
+private Long alquilerId; // Usamos UUID para mantener la integridad del tipo de dato
 
-    private Integer fechaInicio;
 
-    private Integer fechaFin;
+    // Cambié de Integer a LocalDate para representar correctamente fechas de calendario
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
 
     private Integer precioDia;
 
-    private Integer precioTotal;
-
+    // Manejaremos el precio total mediante un cálculo para evitar inconsistencias
     public Alquiler() {
     }
 
-    public String getIdAlquiler() {
-        return idAlquiler;
+    public Long getAlquilerId() {
+        return alquilerId;
     }
 
-    public void setIdAlquiler(String idAlquiler) {
-        this.idAlquiler = idAlquiler;
+    public void setAlquilerId(Long alquilerId) {
+        this.alquilerId = alquilerId;
     }
 
-    public Integer getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Integer fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Integer getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Integer fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -57,15 +61,25 @@ public class Alquiler {
         this.precioDia = precioDia;
     }
 
+    // Calcular el precio total basado en el precio por día, considerando las fechas de inicio y fin
     public Integer getPrecioTotal() {
-        return precioTotal;
+        if (fechaInicio != null && fechaFin != null && precioDia != null) {
+            long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+            return (int) dias * precioDia;
+        }
+        return 0;
     }
 
-    public void setPrecioTotal(Integer precioTotal) {
-        this.precioTotal = precioTotal;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alquiler alquiler = (Alquiler) o;
+        return alquilerId.equals(alquiler.alquilerId);
     }
 
-
-
-    
+    @Override
+    public int hashCode() {
+        return alquilerId.hashCode();
+    }
 }

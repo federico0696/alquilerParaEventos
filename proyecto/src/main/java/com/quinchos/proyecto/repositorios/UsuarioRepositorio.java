@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.quinchos.proyecto.entidades.Usuario;
 
+import java.util.Optional;
+
 @Repository
-public interface UsuarioRepositorio extends JpaRepository<Usuario,String> {
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
-    public Usuario buscarPorEmail(@Param("email") String email);
-    
+    public Optional<Usuario> buscarPorEmail(@Param("email") String email);
+
 }

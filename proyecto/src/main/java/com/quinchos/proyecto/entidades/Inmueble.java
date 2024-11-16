@@ -1,93 +1,122 @@
 package com.quinchos.proyecto.entidades;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.util.List;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+
 
 @Entity
 public class Inmueble {
 
     @Id
-    @GeneratedValue (generator = "uuid") 
-    @GenericGenerator (name ="uuid", strategy = "uuid2")
-    private String idInmueble;
+    @GeneratedValue(strategy = GenerationType.AUTO) // Permite que Hibernate maneje la generación de UUID
+    @Column(name = "inmueble_id", nullable = false, updatable = false)
+    private Long inmuebleId;
 
-    private String idPropietario;
+    // Relación con el propietario (Usuario con rol PROPIETARIO)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "propietario_id", nullable = false)
+    private Usuario propietario;
 
-    private String idInquilino;
+    // Relación con el inquilino (Usuario con rol INQUILINO)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquilino_id", nullable = true) // Permite que sea nulo si no hay inquilino
+    private Usuario inquilino;
 
-    private String idAlquiler;
+    // Uso de Enum para la categoría del inmueble
+    @Enumerated(EnumType.STRING) // Almacena el valor como una cadena de texto en la base de datos
+    @Column(nullable = false)
+    private CategoriaInmueble categoria;
 
-    private String categoria;
-
+    @Column(length = 100, nullable = false)
+    @NotBlank(message = "La localidad es obligatoria.")
     private String localidad;
 
+    @Column(length = 255)
     private String ubicacion;
 
-    private Integer capacidad;
+    @Column(nullable = false)
+    @Positive(message = "La capacidad debe ser mayor que cero.")
+    private Integer capacidadPersonas;
 
     private boolean disponible;
 
+    @Column(length = 500)
     private String descripcion;
 
     private Integer superficie;
 
     private String imagen;
 
-    private String[] Servicios;
+    @ElementCollection
+    @CollectionTable(name = "inmueble_servicios", joinColumns = @JoinColumn(name = "inmueble_id"))
+    @Column(name = "servicio")
+    private List<String> servicios;
 
-    private String[] comentario;
+    @ElementCollection
+    @CollectionTable(name = "inmueble_comentarios", joinColumns = @JoinColumn(name = "inmueble_id"))
+    @Column(name = "comentario")
+    private List<String> comentarios;
 
     private Integer precioDia;
 
-    @ManyToOne
-    private Propietario propietario;
-
-    
-    public String getIdInquilino() {
-        return idInquilino;
-    }
-
-    public void setIdInquilino(String idInquilino) {
-        this.idInquilino = idInquilino;
-    }
-
-    public Propietario getPropietario() {
-        return propietario;
-    }
-
-    public void setPropietario(Propietario propietario) {
-        this.propietario = propietario;
-    }
-
+    // Constructor por defecto
     public Inmueble() {
     }
 
-    public String getIdInmueble() {
-        return idInmueble;
+    // Getters y Setters
+    public Long getInmuebleId() {
+        return inmuebleId;
     }
 
-    public void setIdInmueble(String idInmueble) {
-        this.idInmueble = idInmueble;
+    public void setInmuebleId(Long inmuebleId) {
+        this.inmuebleId = inmuebleId;
     }
 
-    public String getIdPropietario() {
-        return idPropietario;
+    public Usuario getPropietario() {
+        return propietario;
     }
 
-    public void setIdPropietario(String idPropietario) {
-        this.idPropietario = idPropietario;
+    public void setPropietario(Usuario propietario) {
+        this.propietario = propietario;
     }
 
-    public String getCategoria() {
+    public Usuario getInquilino() {
+        return inquilino;
+    }
+
+    public void setInquilino(Usuario inquilino) {
+        this.inquilino = inquilino;
+    }
+
+    public CategoriaInmueble getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaInmueble categoria) {
         this.categoria = categoria;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
     }
 
     public String getUbicacion() {
@@ -98,12 +127,12 @@ public class Inmueble {
         this.ubicacion = ubicacion;
     }
 
-    public Integer getCapacidad() {
-        return capacidad;
+    public Integer getCapacidadPersonas() {
+        return capacidadPersonas;
     }
 
-    public void setCapacidad(Integer capacidad) {
-        this.capacidad = capacidad;
+    public void setCapacidadPersonas(Integer capacidadPersonas) {
+        this.capacidadPersonas = capacidadPersonas;
     }
 
     public boolean isDisponible() {
@@ -138,28 +167,20 @@ public class Inmueble {
         this.imagen = imagen;
     }
 
-    public String[] getServicios() {
-        return Servicios;
+    public List<String> getServicios() {
+        return servicios;
     }
 
-    public void setServicios(String[] servicios) {
-        Servicios = servicios;
+    public void setServicios(List<String> servicios) {
+        this.servicios = servicios;
     }
 
-    public String[] getComentario() {
-        return comentario;
+    public List<String> getComentarios() {
+        return comentarios;
     }
 
-    public void setComentario(String[] comentario) {
-        this.comentario = comentario;
-    }
-
-    public String getIdAlquiler() {
-        return idAlquiler;
-    }
-
-    public void setIdAlquiler(String idAlquiler) {
-        this.idAlquiler = idAlquiler;
+    public void setComentarios(List<String> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public Integer getPrecioDia() {
@@ -170,13 +191,19 @@ public class Inmueble {
         this.precioDia = precioDia;
     }
 
-    public String getLocalidad() {
-        return localidad;
+    // Queda listo para comparar objetos si es necesario
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Inmueble inmueble = (Inmueble) o;
+        return inmuebleId != null && inmuebleId.equals(inmueble.inmuebleId);
     }
 
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
+    @Override
+    public int hashCode() {
+        return 31 * (inmuebleId != null ? inmuebleId.hashCode() : 0);
     }
-
-
 }

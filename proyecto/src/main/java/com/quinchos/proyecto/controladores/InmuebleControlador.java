@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.quinchos.proyecto.entidades.Usuario;
+import com.quinchos.proyecto.entidades.Rol;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.servicios.UsuarioServicio;
 
@@ -42,7 +42,7 @@ public class InmuebleControlador {
                                 @RequestParam("descripcion") String descripcion ) {                                               
        
        try {
-            Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+            Rol usuario = (Rol) session.getAttribute("usuariosession");
             inmuebleServicio.crearInmueble(usuario.getId(), categoria, localidad, ubicacion, capacidad, superficie, precio, imagen, servicios, descripcion);
             modelo.put("exito", "Inmueble registrado correctamente");
             return "menu.html";

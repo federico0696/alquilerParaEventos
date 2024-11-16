@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.quinchos.proyecto.entidades.Usuario;
+import com.quinchos.proyecto.entidades.Rol;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.entidades.Inquilino;
 import com.quinchos.proyecto.entidades.Propietario;
@@ -28,7 +28,7 @@ public class PerfilControlador {
 
     @GetMapping("/perfilUsuarioInquilino")
     public String perfilInquilino(HttpSession session, ModelMap modelo) {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         List<Inquilino> inquilinos = usuarioServicio.listarInquilinos();
         for (Inquilino aux : inquilinos) {
             if (aux.getIdInquilino().equals(usuario.getId())) {
@@ -40,7 +40,7 @@ public class PerfilControlador {
 
     @GetMapping("/perfilUsuarioPropietario")
     public String perfilPropietario(HttpSession session, ModelMap modelo) {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         List<Propietario> propietarios = usuarioServicio.listarPropietarios();
         for (Propietario aux : propietarios) {
             if (aux.getIdPropietario().equals(usuario.getId())) {
@@ -52,7 +52,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarFotoPerfilInquilino")
     public String cambiarFotoPerfilInquilino(@RequestParam(required = false) MultipartFile imagen, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         usuarioServicio.actualizarFotoPerfilInquilino(usuario.getId(), imagen);
         List<Inquilino> inquilinos = usuarioServicio.listarInquilinos();
         for (Inquilino aux : inquilinos) {
@@ -65,7 +65,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarFotoPerfilPropietario")
     public String cambiarFotoPerfilPropietario(@RequestParam(required = false) MultipartFile imagen, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         usuarioServicio.actualizarFotoPerfilPropietario(usuario.getId(), imagen);
         List<Propietario> propietarios = usuarioServicio.listarPropietarios();
         for (Propietario aux : propietarios) {
@@ -78,7 +78,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarNombreUsuarioInquilino")
     public String cambiarNombreUsuarioInquilino(@RequestParam(required = false) String nombre, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
 
         usuarioServicio.actualizarNombrePerfilInquilino(usuario.getId(), nombre);
         List<Inquilino> inquilinos = usuarioServicio.listarInquilinos();
@@ -92,7 +92,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarNombreUsuarioPropietario")
     public String cambiarNombreUsuarioPropietario(@RequestParam(required = false) String nombre, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         
         usuarioServicio.actualizarNombrePerfilPropietario(usuario.getId(), nombre);
         List<Propietario> propietarios = usuarioServicio.listarPropietarios();
@@ -106,7 +106,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarNombreDomicilioPropietario")
     public String cambiarNombreDomicilioPropietario(@RequestParam(required = false) String domicilio, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         usuarioServicio.actualizarDomicilioPerfilPropietario(usuario.getId(), domicilio);
         List<Propietario> propietarios = usuarioServicio.listarPropietarios();
         for (Propietario aux : propietarios) {
@@ -119,7 +119,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarNombreEmailInquilino")
     public String cambiarNombreEmailInquilino(@RequestParam(required = false) String email, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         usuarioServicio.actualizarEmailPerfilInquilino(usuario.getId(), email);
         List<Inquilino> inquilinos = usuarioServicio.listarInquilinos();
         for (Inquilino aux : inquilinos) {
@@ -132,7 +132,7 @@ public class PerfilControlador {
 
     @PostMapping("/cambiarNombreEmailPropietario")
     public String cambiarNombreEmailPropietario(@RequestParam(required = false) String email, HttpSession session, ModelMap modelo) throws MiException {
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Rol usuario = (Rol) session.getAttribute("usuariosession");
         usuarioServicio.actualizarEmailPerfilPropietario(usuario.getId(), email);
         List<Propietario> propietarios = usuarioServicio.listarPropietarios();
         for (Propietario aux : propietarios) {

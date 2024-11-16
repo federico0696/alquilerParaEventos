@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.entidades.Inquilino;
 import com.quinchos.proyecto.entidades.Propietario;
-import com.quinchos.proyecto.entidades.Usuario;
+import com.quinchos.proyecto.entidades.Rol;
 import com.quinchos.proyecto.enumeraciones.Rol;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.repositorios.InquilinoRepositorio;
@@ -97,7 +97,7 @@ public class UsuarioServicio implements UserDetailsService{
 
         inquilinoRepositorio.save(inquilino);
 
-        Usuario usuario = new Usuario();
+        Rol usuario = new Rol();
 
         usuario.setId(inquilino.getIdInquilino());
         usuario.setEmail(email);
@@ -109,7 +109,7 @@ public class UsuarioServicio implements UserDetailsService{
     }
 
     @Transactional
-    public List<Usuario> listarUsuarios() {
+    public List<Rol> listarUsuarios() {
 
         return usuarioRepositorio.findAll();
     }
@@ -152,13 +152,13 @@ public class UsuarioServicio implements UserDetailsService{
 
     public void actualizarEmailPerfilInquilino(String idUsuario, String email) throws MiException {
         Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
-        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
+        Optional<Rol> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
         if (respuesta.isPresent()) {
             Inquilino inquilino = respuesta.get();
             inquilino.setEmail(email);
             inquilinoRepositorio.save(inquilino);
 
-            Usuario usuario = respuestaUsuario.get();
+            Rol usuario = respuestaUsuario.get();
             usuario.setEmail(email);
             usuarioRepositorio.save(usuario);
         }
@@ -229,7 +229,7 @@ public class UsuarioServicio implements UserDetailsService{
 
         propietarioRepositorio.save(propietario);
 
-        Usuario usuario = new Usuario();
+        Rol usuario = new Rol();
 
         usuario.setId(propietario.getIdPropietario());
         usuario.setEmail(email);
@@ -286,13 +286,13 @@ public class UsuarioServicio implements UserDetailsService{
 
     public void actualizarEmailPerfilPropietario(String idUsuario, String email) throws MiException {
         Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
-        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
+        Optional<Rol> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
         if (respuesta.isPresent()) {
             Propietario propietario = respuesta.get();
             propietario.setEmail(email);
             propietarioRepositorio.save(propietario);
 
-            Usuario usuario = respuestaUsuario.get();
+            Rol usuario = respuestaUsuario.get();
             usuario.setEmail(email);
             usuarioRepositorio.save(usuario);
         }
@@ -304,7 +304,7 @@ public class UsuarioServicio implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+        Rol usuario = usuarioRepositorio.buscarPorEmail(email);
 
         if (usuario != null) {
 
