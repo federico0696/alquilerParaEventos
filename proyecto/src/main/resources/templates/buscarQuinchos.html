@@ -8,12 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/buscarQuinchos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-    <h2>Buscá tu espacio</h2>
+    <header class="header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="Logo" />
+            </a>
+        </div>
+        <a th:href="@{/logout}" class="boton cerrar">Cerrar Sesión</a>
+    </header>  
     <form id="busquedaForm" th:action="@{/buscarQuinchos}" method="POST">
+        <div class= Buscar>
+            <h2>Buscá Tu Espacio</h2>
+        </div>
         <label for="categoria">Categoría:</label>
         <select id="categoria" name="categoria">
             <option value="">Todas las categorías</option>
