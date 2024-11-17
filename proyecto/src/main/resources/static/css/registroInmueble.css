@@ -12,45 +12,109 @@ body {
 
 /* Form Container */
 .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(119, 106, 106);
     background-color: #a1bfb6;
     color: #fff;
-    padding: 2rem;
+    padding: 20px 25px 20px 25px;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
 .form-container h2 {
+    border-bottom: 2px solid #8d8d8d;
+    padding-bottom: 20px;
     margin-top: 0;
-    color: #fff;
+    color: #ffffff;
+    width: 100%;
+    margin: 0px 20px 0px 20px;
+
 }
 
 /* Form Styles */
 form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    align-items: center;
-}
-
-/* Labels and Inputs */
-.form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+} 
+
+/* Labels and Inputs */
+.form-group1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px 20px 20px 20px;
+    gap: 20px;
+}
+.form-group2 {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px 20px 20px 20px;
+    gap: 20px;
+}
+.form-group3 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px 20px 20px 20px;
+    gap: 20px;
 }
 
 label {
     font-weight: 600;
     text-align: left;
     color: #fff;
+    margin-left: 5px;
 }
 
-.input-container {
+.input-container1{
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+.input-container2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}.input-container3{
+    display: flex;
+    flex-direction: column;
+    width: 8%;
+}.input-container4{
+    display: flex;
+    flex-direction: column;
+    width: 8%;
+}.input-container5{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.input-container6{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.serviciosConteiner{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.servicios{
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(10, 1fr); /* Crea 5 columnas de igual tamaño */
+    gap: 10px; /* Espacio entre los elementos */
 }
 
 select, input[type="text"], input[type="number"], input[type="file"] {
@@ -66,11 +130,6 @@ select, input[type="text"], input[type="number"], input[type="file"] {
 
 input::placeholder {
     color: #888;
-}
-
-/* Full-width for the file input and button */
-input[type="file"], .form-submit {
-    grid-column: span 2;
 }
 
 /* Submit Button */
@@ -90,4 +149,3 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #13a387d9;
 }
-

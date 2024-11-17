@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,87 +9,97 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/registroInmueble.css">
 </head>
+
 <body>
 
     <div class="form-container">
-        <h2>Registar Inmueble</h2>
+        <h2>Registra tu Inmueble</h2>
 
-        <form class="modal-form" th:action="@{/registroInmueble}" method="post" enctype="multipart/form-data">
-            <div class="form-group">
+        <form action="/inmueble/registroInmueble" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group1">
                 <label for="categoria">Categoría:</label>
-                <div class="input-container">
+                <div class="input-container1">
                     <select id="categoria" name="categoria">
                         <option value="">Selecciona una categoría</option>
-                        <option value="familiar">Boda</option>
-                        <option value="corporativo">Empresarial</option>
-                        <option value="evento">Fiesta</option>
-                        <option value="evento">Reunión</option>
+                        <option value="boda">Boda</option>
+                        <option value="empresarial">Empresarial</option>
+                        <option value="fiesta">Fiesta</option>
+                        <option value="reunion">Reunión</option>
                     </select>
-                    <input type="text" placeholder="Otra categoría" name="categoria_otro">
+                </div>
+                <label for="categoria">Localidad:</label>
+                <div class="input-container1">
+                    <select id="categoria" name="localidad">
+                        <option value="GODOY CRUZ">Godoy Cruz</option>
+                        <option value="GUAYMALLEN">Guaymallen</option>
+                        <option value="LUJAN">Lujan</option>
+                        <option value="LAS HERAS">Las Heras</option>
+                    </select>
+                </div>
+                <label for="ubicacion">Ubicacion:</label>
+                <div class="input-container2">
+                    <input type="text" placeholder="Ubicacion del lugar" name="ubicacion">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="ubicacion">Ubicación:</label>
-                <div class="input-container">
-                    <select id="ubicacion" name="ubicacion">
-                        <option value="">Selecciona una ubicación</option>
-                        <option value="centro">Godoy Cruz</option>
-                        <option value="norte">Guaymallen</option>
-                        <option value="sur">Lujan</option>
-                        <option value="este">Las Heras</option>
-                        
-                    </select>
-                    <input type="text" placeholder="Otra ubicación" name="ubicacion_otro">
+            <div class="form-group2">
+                <label for="capacidad">Capacidad de personas:</label>
+                <div class="input-container3">
+                    <input type="number" name="capacidad" min="1" max="99999" value="1" placeholder="Capacidad exacta">
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="capacidad">Capacidad:</label>
-                <div class="input-container">
-                    <select id="capacidad" name="capacidad">
-                        <option value="">Selecciona la capacidad</option>
-                        <option value="10">Hasta 10 personas</option>
-                        <option value="20">Hasta 20 personas</option>
-                        <option value="50">Hasta 50 personas</option>
-                        <option value="100">Hasta 100 personas</option>
-                        <option value="200">Más de 100 personas</option>
-                    </select>
-                    <input type="number" placeholder="Capacidad exacta" name="capacidad_exacta" min="1">
+                <label for="superficie">Superficie (m²):</label>
+                <div class="input-container4">
+                    <input type="number" name="superficie" min="1" max="99999999" value="1"
+                        placeholder="Superficie exacta o aproximada">
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="descripcion">Descripción:</label>
-                <div class="input-container">
-                    <select id="descripcion" name="descripcion">
-                        <option value="">Selecciona una descripción</option>
-                        <option value="techado">Techado</option>
-                        <option value="al aire libre">Al Aire Libre</option>
-                        <option value="con piscina">Con Piscina</option>
-                        <option value="con asador">Con Asador</option>
-                    </select>
-                    <input type="text" placeholder="Otra descripción" name="descripcion_otro">
+                <label for="superficie">Precio por dia $ (dólares):</label>
+                <div class="input-container4">
+                    <input type="number" name="precio" min="1" max="99999" value="1">
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="superficie">Superficie:</label>
-                <div class="input-container">
-                    <select id="superficie" name="superficie">
-                        <option value="">Selecciona la superficie (m²)</option>
-                        <option value="50">Hasta 50 m²</option>
-                        <option value="100">Hasta 100 m²</option>
-                        <option value="200">Hasta 200 m²</option>
-                        <option value="300">Más de 200 m²</option>
-                    </select>
-                    <input type="number" placeholder="Superficie exacta" name="superficie_exacta" min="1">
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*">
+                <div class="input-container5">
+                    <input type="file" id="imagen" name="imagen">
+                </div>
+            </div>
+
+            <div class="form-group3">
+                <div class="serviciosConteiner">
+                    <label for="servicios">Servicios:</label>
+                    <div class="servicios">
+                        <label for="servicios">Musica:</label>
+                        <input type="checkbox" name="servicios[]" value="Musica">
+                        <label for="servicios">Fotografia:</label>
+                        <input type="checkbox" name="servicios[]" value="Fotografia">
+                        <label for="servicios">WiFi:</label>
+                        <input type="checkbox" name="servicios[]" value="WiFi">
+                        <label for="servicios">Cochera:</label>
+                        <input type="checkbox" name="servicios[]" value="Cochera">
+                        <label for="servicios">Catering:</label>
+                        <input type="checkbox" name="servicios[]" value="Catering">
+                        <label for="servicios">Seguridad:</label>
+                        <input type="checkbox" name="servicios[]" value="Seguridad">
+                        <label for="servicios">Iluminacion:</label>
+                        <input type="checkbox" name="servicios[]" value="Iluminacion">
+                        <label for="servicios">Vajilla:</label>
+                        <input type="checkbox" name="servicios[]" value="Vajilla">
+                        <label for="servicios">Heladera:</label>
+                        <input type="checkbox" name="servicios[]" value="Heladera">
+                        <label for="servicios">Freezer:</label>
+                        <input type="checkbox" name="servicios[]" value="Freezer">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group3">
+                <label for="descripcion">Descripción:</label>
+                <div class="input-container6">
+                    <input type="text" placeholder="Has una breve descripcion de tu inmueble" name="descripcion">
+                </div>
             </div>
 
             <div class="form-group form-submit">

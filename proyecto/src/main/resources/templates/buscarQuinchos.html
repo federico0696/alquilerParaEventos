@@ -12,36 +12,68 @@
 </head>
 
 <body>
-    <div class="formulario">
-        <div class="envoltorio">
+    <h2>Buscá tu espacio</h2>
+    <form id="busquedaForm" th:action="@{/buscarQuinchos}" method="POST">
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria">
+            <option value="">Todas las categorías</option>
+            <option value="boda">Boda</option>
+            <option value="empresarial">Empresarial</option>
+            <option value="fiesta">Fiesta</option>
+            <option value="reunion">Reunión</option>
+        </select>
 
-            <form th:action="@{/buscarQuinchos}" method="POST" enctype="multipart/form-data">
-                <h2>Formulario que tiene que hacer el Fer</h2>
-                <div class="input-box">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" placeholder="Ingrese su Email" required>
-                </div>
+        <label for="Localidad">Localidad:</label>
+        <input type="text" id="Localidad" name="localidad" placeholder="Ingrese localidad" list="sugerenciasUbicacion">
+        <datalist id="sugerenciasUbicacion">
+            <option value="Capital">
+            <option value="General Alvear">
+            <option value="Godoy Cruz">
+            <option value="Guaymallén">
+            <option value="Junín">
+            <option value="La Paz">
+            <option value="Las Heras">
+            <option value="Lavalle">
+            <option value="Lujan">
+            <option value="Maipú">
+            <option value="Malargüe">
+            <option value="Rivadavia">
+            <option value="San Carlos">
+            <option value="San Martín">
+            <option value="San Rafael">
+            <option value="Santa Rosa">
+            <option value="Tunuyán">
+            <option value="Tupungato">
+        </datalist>
 
-                <div class="input-box">
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" placeholder="Ingrese su contraseña" required>
-                </div>
+        <label for="capacidad">Capacidad:</label>
+        <input type="number" id="capacidad" name="capacidad" min="1" max="10000" placeholder="Ej. 100 personas">
 
-                <button type="submit" class="btn">Iniciar Sesión</button>
+        <label for="superficie">Superficie (m²):</label>
+        <input type="number" id="superficie" name="superficie" min="1" max="9999999" placeholder="Ej. 1000 m²">
 
-            </form>
+        <label>Servicios Adicionales:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="servicios[]" value="Musica"> Musica</label>
+            <label><input type="checkbox" name="servicios[]" value="Fotografia"> Fotografía</label>
+            <label><input type="checkbox" name="servicios[]" value="Wifi"> WiFi</label>
+            <label><input type="checkbox" name="servicios[]" value="Cochera"> Cocheras Techadas</label>
+            <label><input type="checkbox" name="servicios[]" value="Catering"> Catering</label>
+            <label><input type="checkbox" name="servicios[]" value="Seguridad"> Seguridad Privada</label>
+            <label><input type="checkbox" name="servicios[]" value="Iluminacion"> Iluminación</label>
+            <label><input type="checkbox" name="servicios[]" value="Vajilla"> Vajilla</label>
+            <label><input type="checkbox" name="servicios[]" value="Heladera"> Heladera</label>
+            <label><input type="checkbox" name="servicios[]" value="Freezer"> Freezer</label>
         </div>
+
+        <button type="submit">Buscar</button>
+    </form>
+
+
     </div>
 
 
     <script src="/js/buscarQuinchos.js"></script>
-</body> 
-
+</body>
 
 </html>
-
-
-
-
-
-
