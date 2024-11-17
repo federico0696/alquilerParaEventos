@@ -36,6 +36,31 @@ public class AlquilerServicio {
         // Guardar el alquiler
         return alquilerRepositorio.save(alquiler);
     }
+
+    public Alquiler registrarAlquiler(Alquiler alquiler) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registrarAlquiler'");
+    }
+
+    public Alquiler obtenerAlquiler(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerAlquiler'");
+    }
+
+    public Object obtenerTodosLosAlquileres() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerTodosLosAlquileres'");
+    }
+
+    public Alquiler actualizarAlquiler(Long id, Alquiler alquiler) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarAlquiler'");
+    }
+
+    public void eliminarAlquiler(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarAlquiler'");
+    }
 }
 
 

@@ -92,4 +92,25 @@ public class InmuebleServicio {
             throw new MiException("El precio debe ser mayor que cero.");
         }
     }
+
+    public Object listarInmuebles() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarInmuebles'");
+    }
+
+    public Inmueble obtenerInmueble(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerInmueble'");
+    }
+
+    public void actualizarInmueble(Long id, String categoria, String localidad, String ubicacion, Integer capacidad,
+            Integer superficie, Integer precio, MultipartFile imagen, String[] servicios, String descripcion) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarInmueble'");
+    }
+
+    public void eliminarInmueble(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarInmueble'");
+    }
 }

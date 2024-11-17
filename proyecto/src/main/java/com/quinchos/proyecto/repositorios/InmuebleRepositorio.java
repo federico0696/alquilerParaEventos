@@ -24,4 +24,15 @@ public interface InmuebleRepositorio extends JpaRepository<Inmueble, Long> {
     // Consultas avanzadas con JPQL
     @Query("SELECT i FROM Inmueble i WHERE i.localidad = :localidad AND i.disponible = true")
     List<Inmueble> findDisponiblesPorLocalidad(String localidad);
+
+    // Buscar inmuebles que contienen un servicio específico
+    @Query("SELECT i FROM Inmueble i WHERE :servicio MEMBER OF i.servicios AND i.disponible = true")
+    List<Inmueble> findByServicio(String servicio);
+
+    // Consultar inmuebles ordenados por precio ascendente
+    List<Inmueble> findAllByOrderByPrecioDiaAsc();
+
+    // Consultar inmuebles ordenados por capacidad descendente
+    List<Inmueble> findAllByOrderByCapacidadPersonasDesc();
 }
+

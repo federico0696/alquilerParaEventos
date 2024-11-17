@@ -25,6 +25,9 @@ public class Usuario {
     @Email
     private String email;
 
+    @Column(length = 255) // Ajusta el tamaño según sea necesario
+    private String imagen;
+
     @Column(length = 100, nullable = false)
     private String password;
 
@@ -68,6 +71,14 @@ public class Usuario {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     
     public String getPassword() {

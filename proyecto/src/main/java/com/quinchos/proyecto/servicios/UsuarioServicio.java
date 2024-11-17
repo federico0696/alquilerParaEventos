@@ -2,7 +2,6 @@ package com.quinchos.proyecto.servicios;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +16,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.quinchos.proyecto.entidades.Inquilino;
-import com.quinchos.proyecto.entidades.Propietario;
 import com.quinchos.proyecto.entidades.Rol;
-import com.quinchos.proyecto.enumeraciones.Rol;
+import com.quinchos.proyecto.entidades.Usuario;
 import com.quinchos.proyecto.excepciones.MiException;
-import com.quinchos.proyecto.repositorios.InquilinoRepositorio;
-import com.quinchos.proyecto.repositorios.PropietarioRepositorio;
 import com.quinchos.proyecto.repositorios.UsuarioRepositorio;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UsuarioServicio implements UserDetailsService{
-    
-    @Autowired
-    private InquilinoRepositorio inquilinoRepositorio ;
-
-    @Autowired
-    private PropietarioRepositorio propietarioRepositorio;
+public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -48,284 +34,134 @@ public class UsuarioServicio implements UserDetailsService{
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-
-    private void validarInquilino(String nombre, String telefono, String email, String password, String password2) throws MiException {
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("el nombre no puede ser nulo o estar vacío");
+    // Validación de los datos al registrar un nuevo usuario
+    private void validarUsuario(String nombre, String email, String password, String password2) throws MiException {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new MiException("El nombre no puede ser nulo o estar vacío");
         }
-        if (telefono.isEmpty() || telefono == null) {
-            throw new MiException("el telefono no puede ser nulo o estar vacío");
+        if (email == null || email.isEmpty()) {
+            throw new MiException("El email no puede ser nulo o estar vacío");
         }
-        if (email.isEmpty() || email == null) {
-            throw new MiException("el email no puede ser nulo o estar vacío");
-        }
-        if (password.isEmpty() || password == null || password.length() <= 5) {
-            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
+        if (password == null || password.isEmpty() || password.length() <= 5) {
+            throw new MiException("La contraseña debe tener más de 5 caracteres");
         }
         if (!password.equals(password2)) {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
     }
 
+    @Transactional
+    public void registrarUsuario(String nombre, String email, String password, String password2, Rol rol) throws MiException {
+        // Validación de los datos
+        validarUsuario(nombre, email, password, password2);
+
+        // Verifica si ya existe un usuario con el mismo email
+        Optional<Usuario> usuarioExistente = usuarioRepositorio.findByEmail(email);
+        if (usuarioExistente.isPresent()) {
+            throw new MiException("Ya existe un usuario con ese email");
+        }
+
+        // Crear un nuevo usuario
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre);
+        usuario.setEmail(email);
+        usuario.setPassword(passwordEncoder.encode(password)); // Codifica la contraseña
+        usuario.setRol(rol); // Asigna el rol
+        usuario.setActivo(true); // El usuario está activo por defecto
+
+        // Guardar el usuario en la base de datos
+        usuarioRepositorio.save(usuario);
+    }
+
+    // Actualizar los datos de un usuario
+    @Transactional
+    public void actualizarUsuario(Long usuarioId, String nombre, String email, String password) throws MiException {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(usuarioId);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            if (nombre != null && !nombre.isEmpty()) {
+                usuario.setNombre(nombre);
+            }
+            if (email != null && !email.isEmpty()) {
+                usuario.setEmail(email);
+            }
+            if (password != null && !password.isEmpty()) {
+                usuario.setPassword(passwordEncoder.encode(password)); // Codifica la contraseña
+            }
+            usuarioRepositorio.save(usuario);
+        } else {
+            throw new MiException("Usuario no encontrado");
+        }
+    }
+
+    // Actualizar la imagen de perfil del usuario
+    @Transactional
+    public void actualizarImagenPerfil(Long usuarioId, MultipartFile imagen) throws MiException {
+        // Lógica para guardar la imagen
+        String imagenUrl = guardarImagen(imagen);
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(usuarioId);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            usuario.setImagen(imagenUrl);
+            usuarioRepositorio.save(usuario);
+        } else {
+            throw new MiException("Usuario no encontrado");
+        }
+    }
+
+    // Guardar la imagen en el servidor y devolver la URL accesible
+    private String guardarImagen(MultipartFile imagen) throws MiException {
+        String imagenUrl = "/img/" + imagen.getOriginalFilename();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            // Construye la ruta absoluta donde se guardará la imagen
+            java.nio.file.Path ruta = Paths.get("src/main/resources/static/img");
+            java.nio.file.Path rutaCompleta = ruta.resolve(imagen.getOriginalFilename()); // Agrega el nombre del archivo a la ruta
+            Files.write(rutaCompleta, bytesImg); // Usa rutaCompleta para escribir la imagen
+        } catch (IOException e) {
+            throw new MiException("Error al guardar la imagen: " + e.getMessage());
+        }
+        return imagenUrl; // Devuelve la URL relativa de la imagen
+    }
     
 
     @Transactional
-    public void registrarInquilino(MultipartFile imagen, String nombre, String telefono, String email, String password, String password2) throws MiException{
-
-        validarInquilino(nombre, telefono, email, password, password2);
-
-        Path directorioImagenes = Paths.get("src/main/resources/static/img");
-        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-        try {
-            byte[] bytesImg = imagen.getBytes();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Inquilino inquilino = new Inquilino();
-
-        inquilino.setNombre(nombre);
-        inquilino.setTelefono(telefono);
-        inquilino.setEmail(email);
-        // Codifica la contraseña antes de guardarla
-        String encodedPassword = passwordEncoder.encode(password);
-        inquilino.setPassword(encodedPassword);
-        inquilino.setRol(Rol.INQUILINO);
-        inquilino.setImagen("/img/" + imagen.getOriginalFilename());
-
-        inquilinoRepositorio.save(inquilino);
-
-        Rol usuario = new Rol();
-
-        usuario.setId(inquilino.getIdInquilino());
-        usuario.setEmail(email);
-        usuario.setPassword(encodedPassword);
-        usuario.setRol(Rol.INQUILINO);
-
-        usuarioRepositorio.save(usuario);
-
-    }
-
-    @Transactional
-    public List<Rol> listarUsuarios() {
-
+    public List<Usuario> listarUsuarios() {
         return usuarioRepositorio.findAll();
     }
 
-    @Transactional
-    public List<Inquilino> listarInquilinos() {
-
-        return inquilinoRepositorio.findAll();
-    }
-
-    public void actualizarFotoPerfilInquilino(String idUsuario, MultipartFile imagen) throws MiException {
-
-        Path directorioImagenes = Paths.get("src/main/resources/static/img");
-        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-        try {
-            byte[] bytesImg = imagen.getBytes();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
-
-        if (respuesta.isPresent()) {
-            Inquilino inquilino = respuesta.get();
-            inquilino.setImagen("/img/" + imagen.getOriginalFilename());
-            inquilinoRepositorio.save(inquilino);
-        }
-    }
-
-    public void actualizarNombrePerfilInquilino(String idUsuario, String nombre) throws MiException {
-        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
-        if (respuesta.isPresent()) {
-            Inquilino inquilino = respuesta.get();
-            inquilino.setNombre(nombre);
-            inquilinoRepositorio.save(inquilino);
-        }
-    }
-
-    public void actualizarEmailPerfilInquilino(String idUsuario, String email) throws MiException {
-        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
-        Optional<Rol> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
-        if (respuesta.isPresent()) {
-            Inquilino inquilino = respuesta.get();
-            inquilino.setEmail(email);
-            inquilinoRepositorio.save(inquilino);
-
-            Rol usuario = respuestaUsuario.get();
-            usuario.setEmail(email);
-            usuarioRepositorio.save(usuario);
-        }
-    }
-
-    public Inquilino getOneInquilino(String id) {
-        return inquilinoRepositorio.findById(id).orElse(null);
-    }
-
-
-    /*----------------------------------INQUILINO----------------------------------------------*/
-    /*-----------------------------------------------------------------------------------------*/ 
-    /*-----------------------------------------------------------------------------------------*/ 
-    /*-----------------------------------------------------------------------------------------*/ 
-    /*-----------------------------------------------------------------------------------------*/ 
-    /*-----------------------------------------------------------------------------------------*/ 
-    /*---------------------------------PROPIETARIO---------------------------------------------*/
-
-
-
-    private void validarPropietario(String nombre, String direccion, String telefono, String email, String password, String password2) throws MiException {
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("el nombre no puede ser nulo o estar vacío");
-        }
-        if (direccion.isEmpty() || direccion == null) {
-            throw new MiException("la direccion no puede ser nula o estar vacía");
-        }
-        if (telefono.isEmpty() || telefono == null) {
-            throw new MiException("el telefono no puede ser nulo o estar vacío");
-        }
-        if (email.isEmpty() || email == null) {
-            throw new MiException("el email no puede ser nulo o estar vacío");
-        }
-        if (password.isEmpty() || password == null || password.length() <= 5) {
-            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
-        }
-        if (!password.equals(password2)) {
-            throw new MiException("Las contraseñas ingresadas deben ser iguales");
-        }
-    }
-
-    @Transactional
-    public void registrarPropietario(MultipartFile imagen, String nombre, String direccion, String telefono, String email, String password, String password2) throws MiException{
-
-        validarPropietario(nombre, direccion, telefono, email, password, password2);
-
-        Path directorioImagenes = Paths.get("src/main/resources/static/img");
-        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-        try {
-            byte[] bytesImg = imagen.getBytes();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Propietario propietario = new Propietario();
-
-        propietario.setNombre(nombre);
-        propietario.setDireccion(direccion);
-        propietario.setTelefono(telefono);
-        propietario.setEmail(email);
-        // Codifica la contraseña antes de guardarla
-        String encodedPassword = passwordEncoder.encode(password);
-        propietario.setPassword(encodedPassword);
-        propietario.setRol(Rol.PROPIETARIO);
-        propietario.setImagen("/img/" + imagen.getOriginalFilename());
-
-        propietarioRepositorio.save(propietario);
-
-        Rol usuario = new Rol();
-
-        usuario.setId(propietario.getIdPropietario());
-        usuario.setEmail(email);
-        usuario.setPassword(encodedPassword);
-        usuario.setRol(Rol.PROPIETARIO);
-
-        usuarioRepositorio.save(usuario);
-    }
-
-    @Transactional
-    public List<Propietario> listarPropietarios() {
-
-        return propietarioRepositorio.findAll();
-    }
-
-    public void actualizarFotoPerfilPropietario(String idUsuario, MultipartFile imagen) throws MiException {
-
-        Path directorioImagenes = Paths.get("src/main/resources/static/img");
-        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-        try {
-            byte[] bytesImg = imagen.getBytes();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
-
-        if (respuesta.isPresent()) {
-            Propietario propietario = respuesta.get();
-            propietario.setImagen("/img/" + imagen.getOriginalFilename());
-            propietarioRepositorio.save(propietario);
-        }
-    }
-
-    public void actualizarNombrePerfilPropietario(String idUsuario, String nombre) throws MiException {
-        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
-        if (respuesta.isPresent()) {
-            Propietario propietario = respuesta.get();
-            propietario.setNombre(nombre);
-            propietarioRepositorio.save(propietario);
-        }
-    }
-
-    public void actualizarDomicilioPerfilPropietario(String idUsuario, String direccion) throws MiException {
-        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
-        if (respuesta.isPresent()) {
-            Propietario propietario = respuesta.get();
-            propietario.setDireccion(direccion);
-            propietarioRepositorio.save(propietario);
-        }
-    }
-
-    public void actualizarEmailPerfilPropietario(String idUsuario, String email) throws MiException {
-        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
-        Optional<Rol> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
-        if (respuesta.isPresent()) {
-            Propietario propietario = respuesta.get();
-            propietario.setEmail(email);
-            propietarioRepositorio.save(propietario);
-
-            Rol usuario = respuestaUsuario.get();
-            usuario.setEmail(email);
-            usuarioRepositorio.save(usuario);
-        }
-    }
-
-    public Propietario getOnePropietario(String id) {
-        return propietarioRepositorio.findById(id).orElse(null);
-    }
-
+    // Método para cargar los detalles del usuario por su email (para autenticación)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Rol usuario = usuarioRepositorio.buscarPorEmail(email);
+        Usuario usuario = usuarioRepositorio.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con email: " + email));
 
-        if (usuario != null) {
+        List<GrantedAuthority> permisos = new ArrayList<>();
+        // Usamos el rol del usuario para crear permisos
+        GrantedAuthority permiso = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+        permisos.add(permiso);
 
-            List<GrantedAuthority> permisos = new ArrayList();
-
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-
-            permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-            HttpSession session = attr.getRequest().getSession(true);
-
-            session.setAttribute("usuariosession", usuario);
-
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-        } else {
-            return null;
-        }
+        return new User(usuario.getEmail(), usuario.getPassword(), permisos);
     }
 
-    
+    public Usuario registrarUsuario(Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registrarUsuario'");
+    }
 
+    public Usuario obtenerUsuario(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerUsuario'");
+    }
+
+    public Usuario actualizarUsuario(Long id, Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarUsuario'");
+    }
+
+    public void eliminarUsuario(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarUsuario'");
+    }
 }
