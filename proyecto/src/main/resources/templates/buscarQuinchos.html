@@ -13,13 +13,14 @@
 
 <body>
     <h2>Buscá tu espacio</h2>
-    <form id="busquedaForm">
+    <form id="busquedaForm" th:action="@{/buscarQuinchos}" method="POST">
         <label for="categoria">Categoría:</label>
         <select id="categoria" name="categoria">
             <option value="">Todas las categorías</option>
-            <option value="quincho_con_pileta">Quincho con pileta</option>
-            <option value="casa_fin_de_semana">Casa de fin de semana</option>
-            <option value="salon_para_fiestas">Salón para fiestas</option>
+            <option value="boda">Boda</option>
+            <option value="empresarial">Empresarial</option>
+            <option value="fiesta">Fiesta</option>
+            <option value="reunion">Reunión</option>
         </select>
 
         <label for="Localidad">Localidad:</label>
@@ -33,7 +34,7 @@
             <option value="La Paz">
             <option value="Las Heras">
             <option value="Lavalle">
-            <option value="Luján de Cuyo">
+            <option value="Lujan">
             <option value="Maipú">
             <option value="Malargüe">
             <option value="Rivadavia">
@@ -46,23 +47,23 @@
         </datalist>
 
         <label for="capacidad">Capacidad:</label>
-        <input type="number" id="capacidad" name="capacidad" min="1" max="10000" placeholder="Ej. 100">
+        <input type="number" id="capacidad" name="capacidad" min="1" max="10000" placeholder="Ej. 100 personas">
 
         <label for="superficie">Superficie (m²):</label>
-        <input type="number" id="superficie" name="superficie" min="1" max="9999999" placeholder="Ej. 100">
+        <input type="number" id="superficie" name="superficie" min="1" max="9999999" placeholder="Ej. 1000 m²">
 
         <label>Servicios Adicionales:</label>
         <div class="checkbox-group">
-            <label><input type="checkbox" name="servicios[]" value="dj"> DJ</label>
-            <label><input type="checkbox" name="servicios[]" value="fotografia"> Fotografía</label>
-            <label><input type="checkbox" name="servicios[]" value="wifi"> WiFi</label>
-            <label><input type="checkbox" name="servicios[]" value="cocheras_techadas"> Cocheras Techadas</label>
-            <label><input type="checkbox" name="servicios[]" value="catering"> Catering</label>
-            <label><input type="checkbox" name="servicios[]" value="seguridad_privada"> Seguridad Privada</label>
-            <label><input type="checkbox" name="servicios[]" value="iluminacion"> Iluminación</label>
-            <label><input type="checkbox" name="servicios[]" value="vajilla"> Vajilla</label>
-            <label><input type="checkbox" name="servicios[]" value="heladera"> Heladera</label>
-            <label><input type="checkbox" name="servicios[]" value="freezer"> Freezer</label>
+            <label><input type="checkbox" name="servicios[]" value="Musica"> Musica</label>
+            <label><input type="checkbox" name="servicios[]" value="Fotografia"> Fotografía</label>
+            <label><input type="checkbox" name="servicios[]" value="Wifi"> WiFi</label>
+            <label><input type="checkbox" name="servicios[]" value="Cochera"> Cocheras Techadas</label>
+            <label><input type="checkbox" name="servicios[]" value="Catering"> Catering</label>
+            <label><input type="checkbox" name="servicios[]" value="Seguridad"> Seguridad Privada</label>
+            <label><input type="checkbox" name="servicios[]" value="Iluminacion"> Iluminación</label>
+            <label><input type="checkbox" name="servicios[]" value="Vajilla"> Vajilla</label>
+            <label><input type="checkbox" name="servicios[]" value="Heladera"> Heladera</label>
+            <label><input type="checkbox" name="servicios[]" value="Freezer"> Freezer</label>
         </div>
 
         <button type="submit">Buscar</button>

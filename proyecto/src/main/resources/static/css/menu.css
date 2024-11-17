@@ -1,4 +1,3 @@
-
 *{
     margin: 0;
     padding: 0;
@@ -15,6 +14,8 @@ body{
 .header{
     height: 55px;
     width: 100%;
+    /* Adiciono padding */
+    padding: 10px; 
     background-color: #1ABC9C;
     display: flex;
     justify-content: space-around;
@@ -28,7 +29,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-left: -100px;
+    margin-left: -50px;
 }
 
 .logo img {
@@ -109,13 +110,25 @@ body{
 
 .seccion1 {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  /*Cambio para alinear en fila con formulario*/
     justify-content: center;
     align-items: center;
     background: url('../img/quinchosModernosCopia.jpeg') no-repeat center center; 
     background-size: cover; 
     width: 100%;
     height: 90vh;
+    gap: 5px; /*Espacio de separación con el formulario*/
+}
+
+.contenido {
+    display: flex;
+    flex-direction: row; /* Alinea el carrusel y el formulario en la misma fila */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre el carrusel y el formulario */
+    width: 100%;
+    max-width: 1200px; /* Limita el ancho del contenedor */
+    height: fit-content;
 }
 
 .imagenesInicio {
@@ -127,17 +140,17 @@ body{
 }
 
 .carrusel-container {
-    right: 200px;
-    top: 70px;
-    position: absolute;
+    right: 0;
+    top: 0;
+    position: relative; /*Ajusto la posición dentro del flex*/
     display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    box-shadow: 0 0 200px rgba(247, 98, 78, 0.4); 
-    background: rgba(87, 100, 77, 0.8); 
+    box-shadow: 0 0 200px rgba(1, 46, 8, 0.4); 
+    background: rgba(30, 41, 21, 0.8); 
     object-fit: contain;
 }
 
@@ -166,24 +179,28 @@ body{
 
 .titulo{
     font-family: "Open Sans";
-    font-size: 48px;
+    font-size: 0.8em;
     font-weight: bold;
     color: white;
+    text-align: center;
     margin-bottom: 5px;
+    padding: 15px;
+    letter-spacing: 0.05em;
 }
 
-.descripcion{
+/* .descripcion{
     font-family: "Open Sans";
     font-size: 20px;
     font-weight: 400;
     color: white;
     margin-bottom: 30px;
-}
+} */
 
 /* Estilo general del formulario */
 form {
     /* border: 2px solid red; */
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
     width: 800px;
@@ -191,6 +208,7 @@ form {
     border-radius: 8px;
     background-color: #0000009d;
     gap: 10px;
+    z-index: 0;
 }
 
 /* Estilos para los elementos select e input */
@@ -323,11 +341,6 @@ form select option, form input[type="number"]::placeholder {
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
-footer{
-    background-color: #004a68;
-    width: 100%;
-    height: 40vh;
-}
 
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
@@ -340,6 +353,7 @@ footer{
     width: 100%;
     height: 100vh;
     background-color: rgba(250, 248, 248, 0.5);
+    z-index: 1;
 }
 
 .contenedorForm {
@@ -425,8 +439,79 @@ footer{
 }
 
 
+/* PIE DE PAGINA */
 
+footer {
+    background-color:#11ac78; /* Fondo del footer */
+    padding: 3px 3px; /* Espaciado interno */
+    box-shadow: 0 -2px 10px rgba(10, 44, 28, 0.5);
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    z-index: 20;
+}
 
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-links a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #f1f1ed;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 5px 5px;
+}
+
+.footer-links a:hover {
+    color: #9deb0c; /* Color al paso del cursor */
+}
+
+.social-media {
+    display: flex; /* Alinea los iconos en fila */
+    align-items: center;
+}
+
+.social-icon {
+    color: #ffffff; /* Color de los iconos */
+    font-size: 20px;
+    margin: 0 5px; /* Reduce el margen horizontal entre iconos */
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icon:hover {
+    color: #a7ebdf; /* Color de los iconos al pasar el cursor */
+    transform: scale(1.5); /* Aumenta el tamaño al pasar el cursor */
+}
+
+p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    color: #ffffff;
+}
 
 
 

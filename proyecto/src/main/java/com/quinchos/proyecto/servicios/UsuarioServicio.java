@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -98,6 +99,7 @@ public class UsuarioServicio implements UserDetailsService{
 
         Usuario usuario = new Usuario();
 
+        usuario.setId(inquilino.getIdInquilino());
         usuario.setEmail(email);
         usuario.setPassword(encodedPassword);
         usuario.setRol(Rol.INQUILINO);
@@ -105,6 +107,67 @@ public class UsuarioServicio implements UserDetailsService{
         usuarioRepositorio.save(usuario);
 
     }
+
+    @Transactional
+    public List<Usuario> listarUsuarios() {
+
+        return usuarioRepositorio.findAll();
+    }
+
+    @Transactional
+    public List<Inquilino> listarInquilinos() {
+
+        return inquilinoRepositorio.findAll();
+    }
+
+    public void actualizarFotoPerfilInquilino(String idUsuario, MultipartFile imagen) throws MiException {
+
+        Path directorioImagenes = Paths.get("src/main/resources/static/img");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
+
+        if (respuesta.isPresent()) {
+            Inquilino inquilino = respuesta.get();
+            inquilino.setImagen("/img/" + imagen.getOriginalFilename());
+            inquilinoRepositorio.save(inquilino);
+        }
+    }
+
+    public void actualizarNombrePerfilInquilino(String idUsuario, String nombre) throws MiException {
+        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+            Inquilino inquilino = respuesta.get();
+            inquilino.setNombre(nombre);
+            inquilinoRepositorio.save(inquilino);
+        }
+    }
+
+    public void actualizarEmailPerfilInquilino(String idUsuario, String email) throws MiException {
+        Optional<Inquilino> respuesta = inquilinoRepositorio.findById(idUsuario);
+        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+            Inquilino inquilino = respuesta.get();
+            inquilino.setEmail(email);
+            inquilinoRepositorio.save(inquilino);
+
+            Usuario usuario = respuestaUsuario.get();
+            usuario.setEmail(email);
+            usuarioRepositorio.save(usuario);
+        }
+    }
+
+    public Inquilino getOneInquilino(String id) {
+        return inquilinoRepositorio.findById(id).orElse(null);
+    }
+
 
     /*----------------------------------INQUILINO----------------------------------------------*/
     /*-----------------------------------------------------------------------------------------*/ 
@@ -168,11 +231,75 @@ public class UsuarioServicio implements UserDetailsService{
 
         Usuario usuario = new Usuario();
 
+        usuario.setId(propietario.getIdPropietario());
         usuario.setEmail(email);
         usuario.setPassword(encodedPassword);
         usuario.setRol(Rol.PROPIETARIO);
 
         usuarioRepositorio.save(usuario);
+    }
+
+    @Transactional
+    public List<Propietario> listarPropietarios() {
+
+        return propietarioRepositorio.findAll();
+    }
+
+    public void actualizarFotoPerfilPropietario(String idUsuario, MultipartFile imagen) throws MiException {
+
+        Path directorioImagenes = Paths.get("src/main/resources/static/img");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
+
+        if (respuesta.isPresent()) {
+            Propietario propietario = respuesta.get();
+            propietario.setImagen("/img/" + imagen.getOriginalFilename());
+            propietarioRepositorio.save(propietario);
+        }
+    }
+
+    public void actualizarNombrePerfilPropietario(String idUsuario, String nombre) throws MiException {
+        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+            Propietario propietario = respuesta.get();
+            propietario.setNombre(nombre);
+            propietarioRepositorio.save(propietario);
+        }
+    }
+
+    public void actualizarDomicilioPerfilPropietario(String idUsuario, String direccion) throws MiException {
+        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+            Propietario propietario = respuesta.get();
+            propietario.setDireccion(direccion);
+            propietarioRepositorio.save(propietario);
+        }
+    }
+
+    public void actualizarEmailPerfilPropietario(String idUsuario, String email) throws MiException {
+        Optional<Propietario> respuesta = propietarioRepositorio.findById(idUsuario);
+        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+            Propietario propietario = respuesta.get();
+            propietario.setEmail(email);
+            propietarioRepositorio.save(propietario);
+
+            Usuario usuario = respuestaUsuario.get();
+            usuario.setEmail(email);
+            usuarioRepositorio.save(usuario);
+        }
+    }
+
+    public Propietario getOnePropietario(String id) {
+        return propietarioRepositorio.findById(id).orElse(null);
     }
 
     @Override
