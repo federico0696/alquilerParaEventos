@@ -92,4 +92,12 @@ public class InmuebleServicio {
 
 
 
+    public List<Inmueble> listarInmuebles() {
+        return inmuebleRepositorio.findAll(); // Obtén todos los inmuebles
+    }
+
+    public void eliminarInmueble(String id) {
+        inmuebleRepositorio.deleteById(id); // Elimina el inmueble por ID
+    }
+
 }

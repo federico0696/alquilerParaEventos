@@ -33,61 +33,44 @@
             <a href="/inmueble/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu espacioo</a>
         </div>
         <div class="publicaTuEspacio">
-            <a href="/admin" role="button" th:if="${session.usuariosession == null}">ADMIN</a>
-            <a href="/inmueble/registroInmueble" role="button" sec:authorize="hasRole('ADMIN')">Publica tu espacioo</a>
-        </div>
-        <div class="publicaTuEspacio">
-            <a href="/admin/inmuebles" role="button" sec:authorize="hasRole('ADMIN')">Lista de Inmuebles</a>
+            <a href="/admin/usuarios" role="button" sec:authorize="hasRole('ADMIN')">Lista de Usuarios</a>
         </div>
     </div>
 
 </header>
 <body>
-<h1>Administración de Usuarios</h1>
-
-<h2>Propietarios</h2>
+<h1>Lista de Inmuebles</h1>
 <table>
     <thead>
     <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Email</th>
-        <th scope="col">Acciones</th>
+        <th>Id</th>
+        <th>Categoría</th>
+        <th>Localidad</th>
+        <th>Ubicación</th>
+        <th>Capacidad</th>
+        <th>Precio</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="usuario : ${propietarios}">
-        <td th:text="${usuario.id}"></td>
-        <td th:text="${usuario.email}"></td>
+    <!-- Itera sobre la lista de inmuebles -->
+    <tr th:each="inmueble : ${inmuebles}">
+        <td th:text="${inmueble.idInmueble}">Id Inmueble</td>
+        <td th:text="${inmueble.categoria}">Categoría</td>
+        <td th:text="${inmueble.localidad}">Localidad</td>
+        <td th:text="${inmueble.ubicacion}">Ubicación</td>
+        <td th:text="${inmueble.capacidad}">Capacidad</td>
+        <td th:text="${inmueble.precioDia}">Precio</td>
         <td>
-            <form th:action="@{/admin/eliminar/{id}(id=${usuario.id})}" method="post">
+            <form th:action="@{/admin/inmuebles/eliminar/{id}(id=${inmueble.idInmueble})}" method="post">
                 <button type="submit">Eliminar</button>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
+</body>
 
-<h2>Inquilinos</h2>
-<table>
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Email</th>
-        <th scope="col">Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="usuario : ${inquilinos}">
-        <td th:text="${usuario.id}"></td>
-        <td th:text="${usuario.email}"></td>
-        <td>
-            <form th:action="@{/admin/eliminar/{id}(id=${usuario.id})}" method="post">
-                <button type="submit">Eliminar</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
 </body>
 <footer>
     <p>&copy; 2024 Los Quinchos. Todos los derechos reservados.</p>

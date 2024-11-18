@@ -45,9 +45,9 @@ public class SeguridadWeb {
                                             if ("ADMIN".equals(role)) {
                                                 response.sendRedirect("/admin/usuarios"); // Redirige a la página de administración
                                             } else if ("PROPIETARIO".equals(role)) {
-                                                response.sendRedirect("/menu"); // Redirige a la página de propietario
+                                                response.sendRedirect("/"); // Redirige a la página de propietario
                                             } else {
-                                                response.sendRedirect("/menu"); // Redirige a la página de inquilino
+                                                response.sendRedirect("/"); // Redirige a la página de inquilino
                                             }
                                         })
                         )
