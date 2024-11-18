@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,31 @@ public class InmuebleServicio {
     @Autowired
     private InmuebleRepositorio inmuebleRepositorio;
 
+    private void validar(String categoria, String localidad, String ubicacion, Integer capacidad, Integer superficie, Integer precioDia) throws MiException {
+        if (categoria == null || categoria.isEmpty()) {
+            throw new MiException("La categoria no puede ser nula o estar vacía");
+        }
+        if (localidad == null || localidad.isEmpty()) {
+            throw new MiException("La localidad no puede ser nula o estar vacía");
+        }
+        if (ubicacion == null || ubicacion.isEmpty()) {
+            throw new MiException("La ubicación no puede ser nula o estar vacía");
+        }
+        if (capacidad == null) {
+            throw new MiException("La capacidad no puede ser nula");
+        }
+        if (superficie == null) {
+            throw new MiException("La superficie no puede ser nula");
+        }
+        if (precioDia == null) {
+            throw new MiException("El precio no puede ser nulo");
+        }
+    }
+
+    
+
     public void crearInmueble(String id, String categoria, String localidad, String ubicacion, Integer capacidad, Integer superficie, Integer precio, MultipartFile imagen, String[] servicios, String descripcion) throws MiException {
-        validar(categoria, localidad, ubicacion, capacidad, descripcion, superficie, precio);
+        validar(categoria, localidad, ubicacion, capacidad, superficie, precio);
 
 
         Path directorioImagenes = Paths.get("src/main/resources/static/img");
@@ -54,27 +78,26 @@ public class InmuebleServicio {
         inmuebleRepositorio.save(inmueble);
     }
 
-    private void validar(String categoria, String localidad, String ubicacion, Integer capacidad, String descripcion, Integer superficie, Integer precioDia) throws MiException {
-        if (categoria == null || categoria.isEmpty()) {
-            throw new MiException("La categoria no puede ser nula o estar vacía");
+    public List<Inmueble> buscarInmueble(String categoria, String localidad, Integer capacidad, Integer superficie) throws MiException {
+        
+        if (localidad != null && localidad.isEmpty()) {
+            localidad = null;
         }
-        if (localidad == null || localidad.isEmpty()) {
-            throw new MiException("La localidad no puede ser nula o estar vacía");
+        if (categoria != null && categoria.isEmpty()) {
+            categoria = null;
         }
-        if (ubicacion == null || ubicacion.isEmpty()) {
-            throw new MiException("La ubicación no puede ser nula o estar vacía");
-        }
-        if (capacidad == null) {
-            throw new MiException("La capacidad no puede ser nula");
-        }
-        if (descripcion == null || descripcion.isEmpty()) {
-            throw new MiException("La descripción no puede ser nula o estar vacía");
-        }
-        if (superficie == null) {
-            throw new MiException("La superficie no puede ser nula");
-        }
-        if (precioDia == null) {
-            throw new MiException("El precio no puede ser nulo");
-        }
+        
+        return inmuebleRepositorio.buscarInmuebles(categoria, localidad, capacidad, superficie);
     }
+
+
+//Agrega diego linea 95 a 101
+    public List<Inmueble> listarInmuebles() {
+        return inmuebleRepositorio.findAll(); // Obtén todos los inmuebles
+    }
+
+    public void eliminarInmueble(String id) {
+        inmuebleRepositorio.deleteById(id); // Elimina el inmueble por ID
+    }
+
 }

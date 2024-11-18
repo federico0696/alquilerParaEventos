@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.quinchos.proyecto.repositorios.InmuebleRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.quinchos.proyecto.entidades.Inquilino;
 import com.quinchos.proyecto.entidades.Propietario;
@@ -32,7 +32,7 @@ import com.quinchos.proyecto.repositorios.PropietarioRepositorio;
 import com.quinchos.proyecto.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class UsuarioServicio implements UserDetailsService{
@@ -305,24 +305,50 @@ public class UsuarioServicio implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> usuarioOptional = Optional.ofNullable(usuarioRepositorio.buscarPorEmail(email));
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
-        if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
+        if (usuario != null) {
 
-            List<GrantedAuthority> permisos = new ArrayList<>();
+            List<GrantedAuthority> permisos = new ArrayList();
+
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+
             permisos.add(p);
 
-            // Almacenar la sesión del usuario
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
             HttpSession session = attr.getRequest().getSession(true);
+
             session.setAttribute("usuariosession", usuario);
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
-            throw new UsernameNotFoundException("Usuario no encontrado con el email: " + email);
+            return null;
         }
     }
+
+    //Agrego Eliminar usuario para admin. (diego)
+    @Transactional(readOnly = true)
+    public List<Usuario> listarPorRol(String rol) {
+        return usuarioRepositorio.findByRol(Rol.valueOf(rol));
+    }
+
+    @Transactional
+    public void eliminarUsuario(String id) throws MiException {
+        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+        if (usuario == null) {
+            throw new MiException("El usuario no existe");
+        }
+
+        // Eliminar el usuario asociado al rol correspondiente
+        if (usuario.getRol() == Rol.PROPIETARIO) {
+            propietarioRepositorio.deleteById(id);
+        } else if (usuario.getRol() == Rol.INQUILINO) {
+            inquilinoRepositorio.deleteById(id);
+        }
+
+        usuarioRepositorio.deleteById(id);
+    }
+    
 
 }
