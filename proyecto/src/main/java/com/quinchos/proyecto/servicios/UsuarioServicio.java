@@ -325,7 +325,13 @@ public class UsuarioServicio implements UserDetailsService{
         } else {
             return null;
         }
+
     }
+    /*@Transactional
+    public List<Administrador> listarAdministrador() {
+
+        return administradorRepositorio.findAll();
+    }*/
 
     //Agrego Eliminar usuario para admin. (diego)
     @Transactional(readOnly = true)
@@ -349,6 +355,19 @@ public class UsuarioServicio implements UserDetailsService{
 
         usuarioRepositorio.deleteById(id);
     }
-    
+
+    @Transactional
+    public void cambiarRol(String id) {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            if (usuario.getRol().equals(Rol.PROPIETARIO)) {
+                usuario.setRol(Rol.INQUILINO);
+            } else if (usuario.getRol().equals(Rol.INQUILINO)) {
+                usuario.setRol(Rol.PROPIETARIO);
+        }
+        }
+    }
 
 }

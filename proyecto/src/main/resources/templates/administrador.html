@@ -51,6 +51,8 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Email</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Cambiar de Rol</th>
         <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -58,6 +60,11 @@
     <tr th:each="usuario : ${propietarios}">
         <td th:text="${usuario.id}"></td>
         <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.rol}"></td>
+
+        <td>
+            <a th:href="@{/admin/modificarRol/__${usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a>
+        </td>
         <td>
             <form th:action="@{/admin/eliminar/{id}(id=${usuario.id})}" method="post">
                 <button type="submit">Eliminar</button>
@@ -73,6 +80,8 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Email</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Cambiar de Rol</th>
         <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -80,11 +89,34 @@
     <tr th:each="usuario : ${inquilinos}">
         <td th:text="${usuario.id}"></td>
         <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.rol}"></td>
+
+        <td>
+            <a th:href="@{/admin/modificarRol/__${usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a>
+        </td>
         <td>
             <form th:action="@{/admin/eliminar/{id}(id=${usuario.id})}" method="post">
                 <button type="submit">Eliminar</button>
             </form>
         </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Admin</h2>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rol</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${administrador}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.rol}"></td>
+
     </tr>
     </tbody>
 </table>
