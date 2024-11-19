@@ -97,6 +97,14 @@ public class InmuebleServicio {
                 .orElseThrow(() -> new EntityNotFoundException("No se encontró el inmueble con id: " + idInmueble));
     }
 
+//Agrega diego linea 95 a 101
+    public List<Inmueble> listarInmuebles() {
+        return inmuebleRepositorio.findAll(); // Obtén todos los inmuebles
+    }
+
+    public void eliminarInmueble(String id) {
+        inmuebleRepositorio.deleteById(id); // Elimina el inmueble por ID
+    }
 
     //Agrega diego linea 95 a 101
     public List<Inmueble> listarInmuebles() {

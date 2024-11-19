@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.quinchos.proyecto.entidades.Inquilino;
 import com.quinchos.proyecto.entidades.Propietario;
@@ -31,7 +32,7 @@ import com.quinchos.proyecto.repositorios.PropietarioRepositorio;
 import com.quinchos.proyecto.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class UsuarioServicio implements UserDetailsService{
@@ -328,6 +329,7 @@ public class UsuarioServicio implements UserDetailsService{
 
 
 
+
     /*---------------------------------PROPIETARIO---------------------------------------------*/
     /*-----------------------------------------------------------------------------------------*/ 
     /*-----------------------------------------------------------------------------------------*/ 
@@ -337,8 +339,10 @@ public class UsuarioServicio implements UserDetailsService{
     /*---------------------------------FUNCIONES POR DIEGO-------------------------------------*/
 
 
+  
     //Agrego Eliminar usuario para admin. (diego)
-    @Transactional
+    @Transactional(readOnly = true)
+
     public List<Usuario> listarPorRol(String rol) {
         return usuarioRepositorio.findByRol(Rol.valueOf(rol));
     }
