@@ -326,6 +326,40 @@ public class UsuarioServicio implements UserDetailsService{
         }
     }
 
+
+
+    /*---------------------------------PROPIETARIO---------------------------------------------*/
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*---------------------------------FUNCIONES POR DIEGO-------------------------------------*/
+
+
+    //Agrego Eliminar usuario para admin. (diego)
+    @Transactional
+    public List<Usuario> listarPorRol(String rol) {
+        return usuarioRepositorio.findByRol(Rol.valueOf(rol));
+    }
+
+    @Transactional
+    public void eliminarUsuario(String id) throws MiException {
+        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+        if (usuario == null) {
+            throw new MiException("El usuario no existe");
+        }
+
+        // Eliminar el usuario asociado al rol correspondiente
+        if (usuario.getRol() == Rol.PROPIETARIO) {
+            propietarioRepositorio.deleteById(id);
+        } else if (usuario.getRol() == Rol.INQUILINO) {
+            inquilinoRepositorio.deleteById(id);
+        }
+
+        usuarioRepositorio.deleteById(id);
+    }
+
     
 
 }

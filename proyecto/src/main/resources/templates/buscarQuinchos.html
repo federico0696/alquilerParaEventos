@@ -12,8 +12,20 @@
 </head>
 
 <body>
-    <h2>Buscá tu espacio</h2>
+
+    <header class="header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="Logo" />
+            </a>
+        </div>
+        <a th:href="@{/logout}" class="boton cerrar">Cerrar Sesión</a>
+    </header> 
+    
     <form id="busquedaForm" th:action="@{/buscarQuinchos}" method="POST">
+        <div class= Buscar>
+            <h2>Buscá Tu Espacio</h2>
+        </div>
         <label for="categoria">Categoría:</label>
         <select id="categoria" name="categoria">
             <option value="">Todas las categorías</option>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO ALQUILER DE QUINCHOS PARA FIESTAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/quinchos.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="Logo" />
+            </a>
+        </div>
+
+        <div class="nav">
+            <div class="registro-inicioSesion">
+                <a href="/buscarQuinchos" role="button" th:if="${session.usuariosession == null}">Busca tu espacio</a>
+                <a href="/buscarQuinchos" role="button" sec:authorize="hasRole('INQUILINO')">Busca tu espacio</a>
+                <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
+                <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
+                <a href="/perfil/perfilUsuario" role="button" th:if="${session.usuariosession}"><i
+                        class="bi bi-person-fill"></i>Perfil</a>
+            </div>
+
+            <div class="publicaTuEspacio">
+                <a href="/publicaTuEspacio" role="button" th:if="${session.usuariosession == null}">Publicar tu
+                    espacio</a>
+                <a href="/inmueble/registroInmueble" role="button" sec:authorize="hasRole('PROPIETARIO')">Publica tu
+                    espacioo</a>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+    <div class="contenedor">
+        <div class="contenedor-inmuebles">
+            <div class="inmueble" th:each="inmueble : ${inmueble}">
+                <h4 class="inmueble-titulo" th:text="${inmueble.categoria}"></h4>
+                <div class="inmueble-imagen">
+                    <img th:src="${inmueble.imagen}" alt="Imagen de inmueble">
+                </div>
+                <div class="inmueble-detalles">
+                    <h4 class="inmueble-titulo" th:text="${inmueble.localidad}"></h4>
+                    <h4 class="inmueble-titulo" th:text="'Capacidad: ' + ${inmueble.capacidad}"></h4>
+                    <h4 class="inmueble-titulo" th:text="'Superficie (M²): ' + ${inmueble.superficie}"></h4>
+                    <p class="inmueble-precio">
+                        <span>Precio por dia:$<span th:text="${inmueble.precioDia}"></span></span>
+
+                    </p>
+                </div>
+                <form th:action="@{/inmueble/formularioAlquilarInmueble}" method="GET">
+                    <input th:value="${inmueble.idInmueble}" name="idInmueble">
+                    <button>Alquilar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <form action="/inmueble/formularioAlquilarInmueble" method="POST">
+        <h2>Formulario de Alquiler</h2>
+    
+        <!-- Campo para ID del inmueble (oculto) -->
+        <input type="hidden" name="idInmueble" th:value="${inmueble.idInmueble}">
+    
+        <!-- Selección de fechas -->
+        <label for="fechaInicio">Fecha de inicio del alquiler:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" required onchange="calcularPrecioTotal()">
+    
+        <label for="fechaFin">Fecha de fin del alquiler:</label>
+        <input type="date" id="fechaFin" name="fechaFin" required onchange="calcularPrecioTotal()">
+    
+        <!-- Precio por día (oculto, pero con valor predefinido) -->
+        <input type="hidden" id="precioDia" name="precioDia" th:value="${inmueble.precioDia}">
+    
+        <!-- Campo para mostrar el precio total -->
+        <label for="precioTotal">Precio total:</label>
+        <input type="text" id="precioTotal" name="precioTotal" readonly placeholder="Se calculará automáticamente">
+    
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Registrar Alquiler</button>
+    </form>
+    
+    <script>
+        function calcularPrecioTotal() {
+            const fechaInicio = new Date(document.getElementById("fechaInicio").value);
+            const fechaFin = new Date(document.getElementById("fechaFin").value);
+            const precioDia = parseInt(document.getElementById("precioDia").value);
+    
+            if (fechaInicio && fechaFin && !isNaN(precioDia)) {
+                const diferenciaDias = Math.ceil((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24));
+                if (diferenciaDias > 0) {
+                    const precioTotal = diferenciaDias * precioDia;
+                    document.getElementById("precioTotal").value = precioTotal;
+                } else {
+                    document.getElementById("precioTotal").value = "Fechas inválidas";
+                }
+            }
+        }
+    </script>
+
+
+
+
+    <script src="/js/alquilarInmueble.js"></script>
+</body>
+
+</html>
