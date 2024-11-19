@@ -24,6 +24,8 @@
             <div class="registro-inicioSesion">
                 <a href="/buscarQuinchos" role="button" th:if="${session.usuariosession == null}">Busca tu espacio</a>
                 <a href="/buscarQuinchos" role="button" sec:authorize="hasRole('INQUILINO')">Busca tu espacio</a>
+                <a href="/admin/usuarios" role="button" sec:authorize="hasRole('ADMIN')">lista Usuarios</a>
+                <a href="/admin/inmuebles" role="button" sec:authorize="hasRole('ADMIN')">lista Inmuebles</a>
                 <a href="/login" role="button" th:if="${session.usuariosession == null}">Iniciar sesión</a>
                 <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
                 <a href="javascript:void(0);" onclick="openModal()" class="open-modal-btn"

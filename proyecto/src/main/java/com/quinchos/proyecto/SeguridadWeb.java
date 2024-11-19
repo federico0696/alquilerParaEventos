@@ -50,7 +50,7 @@ public class SeguridadWeb {
                                                 response.sendRedirect("/"); // Redirige a la página de inquilino
                                             }
                                         })
-                        )
+                        )//linea 35 a 52 agrega Diego para poder corregir conflicto con login
                         .logout((logout) -> logout
                             .logoutUrl("/logout")
                             .logoutSuccessUrl("/")

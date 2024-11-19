@@ -14,6 +14,8 @@ public class Alquiler {
     @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idAlquiler;
 
+    private String idInmueble;
+
     private Integer fechaInicio;
 
     private Integer fechaFin;
@@ -63,6 +65,14 @@ public class Alquiler {
 
     public void setPrecioTotal(Integer precioTotal) {
         this.precioTotal = precioTotal;
+    }
+
+    public String getIdInmueble() {
+        return idInmueble;
+    }
+
+    public void setIdInmueble(String idInmueble) {
+        this.idInmueble = idInmueble;
     }
 
 
