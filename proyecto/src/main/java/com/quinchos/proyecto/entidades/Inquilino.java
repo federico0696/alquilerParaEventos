@@ -18,7 +18,7 @@ public class Inquilino {
     @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idInquilino;
 
-    private String idInmueble;
+    private String idAlquileres;
 
     private String nombre;
 
@@ -44,12 +44,12 @@ public class Inquilino {
         this.idInquilino = idInquilino;
     }
 
-    public String getIdInmueble() {
-        return idInmueble;
+    public String getIdAlquileres() {
+        return idAlquileres;
     }
 
-    public void setIdInmueble(String idInmueble) {
-        this.idInmueble = idInmueble;
+    public void setIdAlquileres(String idAlquileres) {
+        this.idAlquileres = idAlquileres;
     }
 
     public String getNombre() {

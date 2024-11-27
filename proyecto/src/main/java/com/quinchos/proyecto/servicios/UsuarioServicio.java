@@ -89,6 +89,7 @@ public class UsuarioServicio implements UserDetailsService{
         inquilino.setNombre(nombre);
         inquilino.setTelefono(telefono);
         inquilino.setEmail(email);
+        inquilino.setIdAlquileres("");
         // Codifica la contraseña antes de guardarla
         String encodedPassword = passwordEncoder.encode(password);
         inquilino.setPassword(encodedPassword);
@@ -360,6 +361,9 @@ public class UsuarioServicio implements UserDetailsService{
         usuarioRepositorio.deleteById(id);
     }
 
+    public Usuario getOneUsuario(String id) {
+        return usuarioRepositorio.findById(id).orElse(null);
+    }
     
 
 }

@@ -18,6 +18,8 @@ public class Propietario {
     @GenericGenerator (name ="uuid", strategy = "uuid2")
     private String idPropietario;
 
+    private String idInmuebles;
+
     private String nombre;
 
     private String direccion;
@@ -106,6 +108,16 @@ public class Propietario {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+
+    public String getIdInmuebles() {
+        return idInmuebles;
+    }
+
+
+    public void setIdInmuebles(String idInmuebles) {
+        this.idInmuebles = idInmuebles;
     }
 
     

@@ -1,5 +1,6 @@
 package com.quinchos.proyecto.controladores;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.quinchos.proyecto.entidades.Alquiler;
 import com.quinchos.proyecto.entidades.Inmueble;
+import com.quinchos.proyecto.entidades.Inquilino;
+import com.quinchos.proyecto.entidades.Propietario;
 import com.quinchos.proyecto.entidades.Usuario;
 import com.quinchos.proyecto.excepciones.MiException;
 import com.quinchos.proyecto.servicios.UsuarioServicio;
@@ -22,6 +26,7 @@ import com.quinchos.proyecto.servicios.UsuarioServicio;
 import jakarta.servlet.http.HttpSession;
 
 import com.quinchos.proyecto.servicios.InmuebleServicio;
+import com.quinchos.proyecto.servicios.AlquilerServicio;
 
 @Controller
 @RequestMapping("/inmueble")
@@ -29,6 +34,12 @@ public class InmuebleControlador {
 
     @Autowired
     private InmuebleServicio inmuebleServicio;
+
+    @Autowired
+    private AlquilerServicio alquilerServicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/registroInmueble")
     public String registroInmueble() {
@@ -44,13 +55,14 @@ public class InmuebleControlador {
             @RequestParam("superficie") Integer superficie,
             @RequestParam("precio") Integer precio,
             @RequestParam(required = false) MultipartFile imagen,
-            @RequestParam(value = "servicios", required = false) String[] servicios,
+            @RequestParam(value = "serviciosComoArreglo", required = false) String[] serviciosComoArreglo,
             @RequestParam("descripcion") String descripcion) {
 
         try {
             Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+            Propietario propietario = usuarioServicio.getOnePropietario(usuario.getId());
             inmuebleServicio.crearInmueble(usuario.getId(), categoria, localidad, ubicacion, capacidad, superficie,
-                    precio, imagen, servicios, descripcion);
+                    precio, imagen, serviciosComoArreglo, descripcion, propietario);
             modelo.put("exito", "Inmueble registrado correctamente");
             return "menu.html";
 
@@ -78,26 +90,22 @@ public class InmuebleControlador {
         return "formularioAlquilarInmueble.html";
     }
 
-    // @PostMapping("/inmueble/formularioAlquilarInmueble")
-    // public String registrarAlquiler(
-    //         @RequestParam String idInmueble,
-    //         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
-    //         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin,
-    //         @RequestParam Integer precioDia,
-    //         @RequestParam Integer precioTotal) {
+    @PostMapping("/formularioAlquilarInmueble")
+    public String registrarAlquiler(HttpSession session,
+            @RequestParam String idInmueble,
+            @RequestParam String fechaInicio,
+            @RequestParam String fechaFin,
+            @RequestParam Integer precioDia,
+            @RequestParam Integer precioTotal) throws MiException {
 
-    //     // Aquí puedes usar esta información para guardar el alquiler en la base de
-    //     // datos
-    //     Alquiler alquiler = new Alquiler();
-    //     alquiler.setIdInmueble(idInmueble);
-    //     alquiler.setFechaInicio(fechaInicio);
-    //     alquiler.setFechaFin(fechaFin);
-    //     alquiler.setPrecioDia(precioDia);
-    //     alquiler.setPrecioTotal(precioTotal);
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        Inquilino inquilino = usuarioServicio.getOneInquilino(usuario.getId());
+        Inmueble inmueble = inmuebleServicio.obtenerInmueblePorId(idInmueble);
 
-    //     alquilerRepositorio.save(alquiler);
+        alquilerServicio.crearAlquiler(inmueble, fechaInicio, fechaFin, precioDia, precioTotal, inquilino);
 
-    //     return "redirect:/confirmacionAlquiler";
-    // }
+        return "menu.html";
+    }
+
 
 }

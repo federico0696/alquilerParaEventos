@@ -17,9 +17,7 @@ public class Inmueble {
 
     private String idPropietario;
 
-    private String idInquilino;
-
-    private String idAlquiler;
+    private String idAlquileres;
 
     private String categoria;
 
@@ -37,30 +35,18 @@ public class Inmueble {
 
     private String imagen;
 
-    private String[] Servicios;
+    private String servicios;
 
-    private String[] comentario;
+    private String comentario;
 
     private Integer precioDia;
 
-    @ManyToOne
-    private Propietario propietario;
-
-    
-    public String getIdInquilino() {
-        return idInquilino;
+    public String getIdAlquileres() {
+        return idAlquileres;
     }
 
-    public void setIdInquilino(String idInquilino) {
-        this.idInquilino = idInquilino;
-    }
-
-    public Propietario getPropietario() {
-        return propietario;
-    }
-
-    public void setPropietario(Propietario propietario) {
-        this.propietario = propietario;
+    public void setIdAlquileres(String idAlquileres) {
+        this.idAlquileres = idAlquileres;
     }
 
     public Inmueble() {
@@ -138,29 +124,23 @@ public class Inmueble {
         this.imagen = imagen;
     }
 
-    public String[] getServicios() {
-        return Servicios;
+    public String getServicios() {
+        return servicios;
     }
 
-    public void setServicios(String[] servicios) {
-        Servicios = servicios;
+    public void setServicios(String servicios) {
+        this.servicios = servicios;
     }
 
-    public String[] getComentario() {
+    public String getComentario() {
         return comentario;
     }
 
-    public void setComentario(String[] comentario) {
+    public void setComentario(String comentario) {
         this.comentario = comentario;
     }
 
-    public String getIdAlquiler() {
-        return idAlquiler;
-    }
-
-    public void setIdAlquiler(String idAlquiler) {
-        this.idAlquiler = idAlquiler;
-    }
+    
 
     public Integer getPrecioDia() {
         return precioDia;
