@@ -99,14 +99,22 @@ public class MenuControlador {
     @PostMapping("/buscarQuinchos")
     public String datosParaBuscarQuinchos(ModelMap modelo,
             @RequestParam(value = "categoria", required = false) String categoria,
-            @RequestParam(value = "localidad", required = false) String localidad, 
+            @RequestParam(value = "localidad", required = false) String localidad,
             @RequestParam(value = "capacidad", required = false) Integer capacidad,
-            @RequestParam(value = "superficie", required = false) Integer superficie) {
+            @RequestParam(value = "superficie", required = false) Integer superficie,
+            @RequestParam(value = "serviciosComoArreglo", required = false) String[] serviciosComoArreglo) {
 
         try {
-            List <Inmueble> inmuebles = inmuebleServicio.buscarInmueble(categoria, localidad, capacidad, superficie);
-            modelo.put("inmuebles", inmuebles);
             
+            // Si serviciosComoArreglo está vacío o null, asigna una cadena vacía
+            String servicios = (serviciosComoArreglo != null && serviciosComoArreglo.length > 0)
+                    ? String.join(",", serviciosComoArreglo)
+                    : ""; // Asegurarse de que servicios nunca sea null
+
+            List<Inmueble> inmuebles = inmuebleServicio.buscarInmueble(categoria, localidad, capacidad, superficie,
+                    servicios);
+            modelo.put("inmuebles", inmuebles);
+
             return "quinchos.html";
 
         } catch (MiException ex) {
@@ -115,7 +123,5 @@ public class MenuControlador {
             return "buscarQuinchos.html";
         }
     }
-
-    
 
 }

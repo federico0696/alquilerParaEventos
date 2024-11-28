@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.quinchos.proyecto.entidades.Inquilino;
 import com.quinchos.proyecto.entidades.Propietario;
@@ -32,7 +31,7 @@ import com.quinchos.proyecto.repositorios.PropietarioRepositorio;
 import com.quinchos.proyecto.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
-
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioServicio implements UserDetailsService{
@@ -90,6 +89,7 @@ public class UsuarioServicio implements UserDetailsService{
         inquilino.setNombre(nombre);
         inquilino.setTelefono(telefono);
         inquilino.setEmail(email);
+        inquilino.setIdAlquileres("");
         // Codifica la contraseña antes de guardarla
         String encodedPassword = passwordEncoder.encode(password);
         inquilino.setPassword(encodedPassword);
@@ -327,8 +327,19 @@ public class UsuarioServicio implements UserDetailsService{
         }
     }
 
+
+
+    /*---------------------------------PROPIETARIO---------------------------------------------*/
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*-----------------------------------------------------------------------------------------*/ 
+    /*---------------------------------FUNCIONES POR DIEGO-------------------------------------*/
+
+
     //Agrego Eliminar usuario para admin. (diego)
-    @Transactional(readOnly = true)
+    @Transactional
     public List<Usuario> listarPorRol(String rol) {
         return usuarioRepositorio.findByRol(Rol.valueOf(rol));
     }
@@ -346,21 +357,13 @@ public class UsuarioServicio implements UserDetailsService{
         } else if (usuario.getRol() == Rol.INQUILINO) {
             inquilinoRepositorio.deleteById(id);
         }
+
         usuarioRepositorio.deleteById(id);
     }
 
-    @Transactional
-    public void cambiarRol(String id) {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-
-        if (respuesta.isPresent()) {
-            Usuario usuario = respuesta.get();
-            if (usuario.getRol().equals(Rol.PROPIETARIO)) {
-                usuario.setRol(Rol.INQUILINO);
-
-            } else if (usuario.getRol().equals(Rol.INQUILINO)) {
-                usuario.setRol(Rol.PROPIETARIO);
-            }
-        }
+    public Usuario getOneUsuario(String id) {
+        return usuarioRepositorio.findById(id).orElse(null);
     }
+    
+
 }

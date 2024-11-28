@@ -16,9 +16,11 @@ public class Alquiler {
 
     private String idInmueble;
 
-    private Integer fechaInicio;
+    private String idInquilino;
 
-    private Integer fechaFin;
+    private String fechaInicio;
+
+    private String fechaFin;
 
     private Integer precioDia;
 
@@ -35,19 +37,19 @@ public class Alquiler {
         this.idAlquiler = idAlquiler;
     }
 
-    public Integer getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Integer fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Integer getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Integer fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -73,6 +75,14 @@ public class Alquiler {
 
     public void setIdInmueble(String idInmueble) {
         this.idInmueble = idInmueble;
+    }
+
+    public String getIdInquilino() {
+        return idInquilino;
+    }
+
+    public void setIdInquilino(String idInquilino) {
+        this.idInquilino = idInquilino;
     }
 
 

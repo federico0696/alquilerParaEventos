@@ -56,13 +56,8 @@
                     <h4 class="inmueble-titulo" th:text="'Superficie (M²): ' + ${inmueble.superficie}"></h4>
                     <p class="inmueble-precio">
                         <span>Precio por dia:$<span th:text="${inmueble.precioDia}"></span></span>
-
                     </p>
                 </div>
-                <form th:action="@{/inmueble/formularioAlquilarInmueble}" method="GET">
-                    <input th:value="${inmueble.idInmueble}" name="idInmueble">
-                    <button>Alquilar</button>
-                </form>
             </div>
         </div>
     </div>
