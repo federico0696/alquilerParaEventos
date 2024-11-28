@@ -19,7 +19,7 @@
                 <img th:src="@{/img/logo.png}" alt="Logo" />
             </a>
         </div>
-        <a th:href="@{/logout}" class="boton cerrar">Cerrar Sesión</a>
+        <a th:href="@{/logout}" class="boton cerrar" th:if="${session.usuariosession}">Cerrar Sesión</a>
     </header> 
     
     <form id="busquedaForm" th:action="@{/buscarQuinchos}" method="POST">

@@ -43,7 +43,7 @@ public class SeguridadWeb {
 
                                             // Redirigir según el rol del usuario
                                             if ("ADMIN".equals(role)) {
-                                                response.sendRedirect("/admin/usuarios"); // Redirige a la página de administración
+                                                response.sendRedirect("/"); // Redirige a la página de administración
                                             } else if ("PROPIETARIO".equals(role)) {
                                                 response.sendRedirect("/"); // Redirige a la página de propietario
                                             } else {
