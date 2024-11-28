@@ -20,173 +20,98 @@
             </a>
         </div>
 
-        <div class="imagen-usuario" sec:authorize="hasRole('PROPIETARIO')">
-            <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
-            <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilPropietario}" method="POST"
-                enctype="multipart/form-data">
-                <label for="archivo">
-                    <i class="bi bi-camera">
-                        <p>cambiar foto de perfil</p>
-                    </i>
-                </label>
-                <input type="file" id="archivo" name="imagen" style="display: none;">
-            </form>
-        </div>
-        <div class="imagen-usuario" sec:authorize="hasRole('INQUILINO')">
-            <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
-            <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilInquilino}" method="POST"
-                enctype="multipart/form-data">
-                <label for="archivo">
-                    <i class="bi bi-camera">
-                        <p>cambiar foto de perfil</p>
-                    </i>
-                </label>
-                <input type="file" id="archivo" name="imagen" style="display: none;">
-            </form>
-        </div>
-
-        <div class="nombre-usuario" sec:authorize="hasRole('PROPIETARIO')">
-            <p class="nombre" th:text="${usuario.nombre}"></p>
-            <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioPropietario}" method="POST">
-                <i class="bi bi-feather">
-                    <p class="editarNombre">editar nombre</p>
-                </i>
-                <input type="text" id="nombre" name="nombre" style="display: none;">
-                <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
-            </form>
-        </div>
-        <div class="nombre-usuario" sec:authorize="hasRole('INQUILINO')">
-            <p class="nombre" th:text="${usuario.nombre}"></p>
-            <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioInquilino}" method="POST">
-                <i class="bi bi-feather">
-                    <p class="editarNombre">editar nombre</p>
-                </i>
-                <input type="text" id="nombre" name="nombre" style="display: none;">
-                <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
-            </form>
-        </div>
-
-
         <div class="nav">
             <div class="registro-inicioSesion">
                 <a href="/logout" role="button" th:if="${session.usuariosession}">Cerrar sesión</a>
                 <a href="/" role="button" th:if="${session.usuariosession}">Menu</a>
             </div>
         </div>
-
     </header>
 
-
-
-
-    <div class="nombre-domicilio" sec:authorize="hasRole('PROPIETARIO')">
-        <p class="domicilio" th:text="'Domicilio: ' + ${usuario.direccion}"></p>
-        <form th:action="@{/perfil/cambiarNombreDomicilioPropietario}" method="POST">
-            <i class="bi bi-feather editDomicilio">
-                <p class="editarDomicilio">editar domicilio</p>
-            </i>
-            <input type="text" id="domicilio" name="domicilio" style="display: none;">
-            <button type="submit" id="botonDomicilio" style="display: none;">Guardar</button>
+    <main>
+        <!-- Información del usuario -->
+        <!-- Perfil Propietario -->
+<section class="perfil-usuario propietario" sec:authorize="hasRole('PROPIETARIO')">
+    <div class="imagen-usuario">
+        <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
+        <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilPropietario}" method="POST" enctype="multipart/form-data">
+            <label for="archivo">
+                <i class="bi bi-camera">
+                    <p>cambiar foto de perfil</p>
+                </i>
+            </label>
+            <input type="file" id="archivo" name="imagen" style="display: none;">
         </form>
     </div>
 
-    <div class="nombre-email" sec:authorize="hasRole('INQUILINO')">
-        <p class="email" th:text="'Email: ' + ${usuario.email}"></p>
-        <form th:action="@{/perfil/cambiarNombreEmailInquilino}" method="POST">
-            <i class="bi bi-feather editEmailInquilino">
-                <p class="editarEmailInquilino">editar email</p>
+    <!-- Información adicional del Propietario -->
+    <div class="nombre-usuario">
+        <p class="nombre" th:text="${usuario.nombre}"></p>
+        <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioPropietario}" method="POST">
+            <i class="bi bi-feather">
+                <p class="editarNombre">editar nombre</p>
             </i>
-            <input type="text" id="emailInquilino" name="email" style="display: none;">
-            <button type="submit" id="botonEmailInquilino" style="display: none;">Guardar</button>
+            <input type="text" id="nombre" name="nombre" style="display: none;">
+            <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
         </form>
     </div>
-    <div class="nombre-email" sec:authorize="hasRole('PROPIETARIO')">
-        <p class="email" th:text="'Email: ' + ${usuario.email}"></p>
-        <form th:action="@{/perfil/cambiarNombreEmailPropietario}" method="POST">
-            <i class="bi bi-feather editEmailPropietario">
-                <p class="editarEmailPropietario">editar email</p>
-            </i>
-            <input type="text" id="emailPropietario" name="email" style="display: none;">
-            <button type="submit" id="botonEmailPropietario" style="display: none;">Guardar</button>
+</section>
+
+<!-- Perfil Inquilino -->
+<section class="perfil-usuario inquilino" sec:authorize="hasRole('INQUILINO')">
+    <div class="imagen-usuario">
+        <img th:src="${usuario.imagen}" alt="Imagen del Usuario">
+        <form id="miFormulario" th:action="@{/perfil/cambiarFotoPerfilInquilino}" method="POST" enctype="multipart/form-data">
+            <label for="archivo">
+                <i class="bi bi-camera">
+                    <p>cambiar foto de perfil</p>
+                </i>
+            </label>
+            <input type="file" id="archivo" name="imagen" style="display: none;">
         </form>
     </div>
 
-    <!-- alquileres del inquilino -->
-    <div sec:authorize="hasRole('INQUILINO')">
-        <div th:if="${alquiler != null}">
-            <h4 th:text="${alquiler.fechaInicio}"></h4>
-            <h4 th:text="${alquiler.fechaFin}"></h4>
-            <h4 th:text="${alquiler.precioDia}"></h4>
-            <h4 th:text="${alquiler.precioTotal}"></h4>
-            <h4 th:text="${inmueble.localidad}"></h4>
-            <h4 th:text="${inmueble.ubicacion}"></h4>
-            <img th:src="${inmueble.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${propietario.telefono}"></h4>
-            <form th:action="@{/perfil/eliminarAlquiler/__${alquiler.idAlquiler}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
-        </div>
-        <div th:if="${alquiler1 != null}">
-            <h4 th:text="${alquiler1.fechaInicio}"></h4>
-            <h4 th:text="${alquiler1.fechaFin}"></h4>
-            <h4 th:text="${alquiler1.precioDia}"></h4>
-            <h4 th:text="${alquiler1.precioTotal}"></h4>
-            <h4 th:text="${inmueble1.localidad}"></h4>
-            <h4 th:text="${inmueble1.ubicacion}"></h4>
-            <img th:src="${inmueble1.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${propietario1.telefono}"></h4>
-            <form th:action="@{/perfil/eliminarAlquiler/__${alquiler1.idAlquiler}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
-        </div>
-        <div th:if="${alquiler2 != null}">
-            <h4 th:text="${alquiler2.fechaInicio}"></h4>
-            <h4 th:text="${alquiler2.fechaFin}"></h4>
-            <h4 th:text="${alquiler2.precioDia}"></h4>
-            <h4 th:text="${alquiler2.precioTotal}"></h4>
-            <h4 th:text="${inmueble2.localidad}"></h4>
-            <h4 th:text="${inmueble2.ubicacion}"></h4>
-            <img th:src="${inmueble2.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${propietario2.telefono}"></h4>
-            <form th:action="@{/perfil/eliminarAlquiler/__${alquiler2.idAlquiler}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
-        </div>
+    <!-- Información adicional del Inquilino -->
+    <div class="nombre-usuario">
+        <p class="nombre" th:text="${usuario.nombre}"></p>
+        <form id="Formulario" th:action="@{/perfil/cambiarNombreUsuarioInquilino}" method="POST">
+            <i class="bi bi-feather">
+                <p class="editarNombre">editar nombre</p>
+            </i>
+            <input type="text" id="nombre" name="nombre" style="display: none;">
+            <button type="submit" id="botonNombre" style="display: none;">Guardar</button>
+        </form>
     </div>
+</section>
 
+    </main>
 
-    <!-- inmuebles propietario -->
-    <div sec:authorize="hasRole('PROPIETARIO')">
-        <div th:if="${inmueble != null}">
-            <h4 th:text="${inmueble.localidad}"></h4>
-            <h4 th:text="${inmueble.ubicacion}"></h4>
-            <img th:src="${inmueble.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${inmueble.precioDia}"></h4>
-            <form th:action="@{/perfil/eliminarInmueble/__${inmueble.idInmueble}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
+<footer class="footer">
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="#privacy">Política de Privacidad</a></li>
+                <li><a href="#terms">Términos y Condiciones</a></li>
+            </ul>
+            <div>
+                <p class="footer-text">&copy; 2024 Los Quinchos. Todos los derechos reservados.</p>
+            </div>
+
+            <div class="social-media">
+                <a href="#" target="_blank" class="social-icon">
+                    <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/facebook.png"
+                        alt="facebook" />
+                </a>
+                <a href="#" target="_blank" class="social-icon">
+                    <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/x.png" alt="x" />
+                </a>
+                <a href="#" target="_blank" class="social-icon">
+                    <img width="24" height="24"
+                        src="https://img.icons8.com/material-outlined/24/FFFFFF/instagram-new--v1.png"
+                        alt="instagram-new--v1" />
+                </a>
+            </div>
         </div>
-        <div th:if="${inmueble1 != null}">
-            <h4 th:text="${inmueble1.localidad}"></h4>
-            <h4 th:text="${inmueble1.ubicacion}"></h4>
-            <img th:src="${inmueble1.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${inmueble1.precioDia}"></h4>
-            <form th:action="@{/perfil/eliminarInmueble/__${inmueble1.idInmueble}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
-        </div>
-        <div th:if="${inmueble2 != null}">
-            <h4 th:text="${inmueble2.localidad}"></h4>
-            <h4 th:text="${inmueble2.ubicacion}"></h4>
-            <img th:src="${inmueble2.imagen}" alt="Imagen del Inmueble">
-            <h4 th:text="${inmueble2.precioDia}"></h4>
-            <form th:action="@{/perfil/eliminarInmueble/__${inmueble2.idInmueble}__}" method="POST">
-                <button>Eliminar alquiler</button>
-            </form>
-        </div>
-    </div>
-
-
+    </footer>
 
     <script src="/js/perfilUsuario.js"></script>
 </body>
