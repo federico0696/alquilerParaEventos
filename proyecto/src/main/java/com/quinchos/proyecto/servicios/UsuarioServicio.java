@@ -303,6 +303,19 @@ public class UsuarioServicio implements UserDetailsService{
         return propietarioRepositorio.findById(id).orElse(null);
     }
 
+    public void eliminarInmuebleDePropietario(String idInmueble, List<String> listaIdsInmueblesDelPropietario, Propietario propietario) {
+        // Eliminar el inmueble de la lista
+        listaIdsInmueblesDelPropietario.remove(idInmueble);
+    
+        // Convertir la lista a un solo String con los IDs separados por comas
+        String idsInmueblesActualizados = String.join(", ", listaIdsInmueblesDelPropietario);
+    
+        // Establecer el nuevo String en el propietario
+        propietario.setIdInmuebles(idsInmueblesActualizados);
+        propietarioRepositorio.save(propietario);
+    }
+
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);

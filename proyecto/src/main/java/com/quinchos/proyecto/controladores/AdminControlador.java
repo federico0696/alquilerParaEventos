@@ -75,7 +75,7 @@ public class AdminControlador {
 
     // Eliminar inmueble
     @PostMapping("/inmuebles/eliminar/{id}")
-    public String eliminarInmueble(@PathVariable String id) {
+    public String eliminarInmueble(@PathVariable(required = false) String id) {
 
         List<String> listaIds = new ArrayList<>(
                 Arrays.asList(inmuebleServicio.obtenerInmueblePorId(id).getIdAlquileres().split(",\\s*")));
@@ -87,6 +87,13 @@ public class AdminControlador {
                                                            // idAlquiler
         }
 
+        List<String> listaIdsInmuebles = new ArrayList<>(
+                Arrays.asList(usuarioServicio.getOnePropietario(inmuebleServicio.obtenerInmueblePorId(id).getIdPropietario()).getIdInmuebles().split(",\\s*")));
+        listaIdsInmuebles.removeIf(String::isEmpty); // Eliminar los IDs vacíos
+
+        
+        usuarioServicio.eliminarInmuebleDePropietario(id, listaIdsInmuebles, usuarioServicio.getOnePropietario(inmuebleServicio.obtenerInmueblePorId(id).getIdPropietario()));
+        
         inmuebleServicio.eliminarInmueble(id);
         return "redirect:/admin/inmuebles"; // Redirige a la lista de inmuebles después de eliminar
     }
