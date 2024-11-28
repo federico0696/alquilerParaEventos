@@ -34,8 +34,10 @@ public class AdminControlador {
     public String listarUsuarios(Model modelo) {
         List<Usuario> propietarios = usuarioServicio.listarPorRol("PROPIETARIO");
         List<Usuario> inquilinos = usuarioServicio.listarPorRol("INQUILINO");
+        List<Usuario> admin = usuarioServicio.listarPorRol("ADMIN");
         modelo.addAttribute("propietarios", propietarios);
         modelo.addAttribute("inquilinos", inquilinos);
+        modelo.addAttribute("administrador", admin);
         return "administrador"; // Página HTML donde se mostrarán los usuarios
     }
 
@@ -64,6 +66,12 @@ public class AdminControlador {
             return "error"; // Redirige a una página de error si ocurre una excepción
         }
     }
+
+    /*@GetMapping("/modificarRol/{id}")
+    public String cambiarRol(@PathVariable String id){
+        usuarioServicio.cambiarRol(id);
+        return "redirect:/admin/usuarios";
+    }*/
 
     // Listar inmuebles
     @GetMapping("/inmuebles")

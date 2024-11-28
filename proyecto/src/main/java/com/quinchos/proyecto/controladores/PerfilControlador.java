@@ -227,7 +227,7 @@ public class PerfilControlador {
     }
 
     @PostMapping("/eliminarAlquiler/{idAlquiler}")
-    public String eliminarAlquiler(@PathVariable String idAlquiler, ModelMap modelo)
+    public String eliminarAlquiler(@PathVariable(required = false) String idAlquiler, ModelMap modelo)
             throws MiException, IOException {
 
         alquilerServicio.eliminarAlquiler(idAlquiler);
@@ -237,7 +237,7 @@ public class PerfilControlador {
     }
 
     @PostMapping("/eliminarInmueble/{idInmueble}")
-    public String eliminarInmueble(@PathVariable String idInmueble, ModelMap modelo)
+    public String eliminarInmueble(@PathVariable(required = false) String idInmueble, ModelMap modelo)
             throws MiException, IOException {
 
         inmuebleServicio.eliminarInmueble(idInmueble);

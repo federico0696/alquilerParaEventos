@@ -3,6 +3,7 @@ package com.quinchos.proyecto.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.quinchos.proyecto.servicios.InmuebleServicio;
 import com.quinchos.proyecto.servicios.UsuarioServicio;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/")
@@ -61,7 +63,6 @@ public class MenuControlador {
         }
         return "login.html";
     }
-
     @GetMapping("/publicaTuEspacio")
     public String publicaTuEspacio() {
 
