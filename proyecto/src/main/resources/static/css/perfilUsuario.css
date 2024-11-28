@@ -1,34 +1,36 @@
-
-/* *{
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-} */
+    height: 100%;
+}
 
-/* body{
-    min-height: 100vh;
-    background-color: white;
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url("/img/PerfilUsuario.jpg");
     background-size: cover;
-    background-position: center;
-} */
+}
 
-/* .header{
+
+
+/*HEADER Igual al de menú*/
+.header{
     height: 55px;
     width: 100%;
+    padding: 10px; 
     background-color: #1ABC9C;
     display: flex;
     justify-content: space-around;
     gap: 180px;
     align-items: center;
     border-bottom: rgb(0, 0, 0) 1px solid;
-} */
+}
 
 /* .logo{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-left: -100px;
+    margin-left: -50px;
 } */
 
 /* .logo img {
@@ -89,106 +91,94 @@
     padding: 6px 20px 6px 20px;
 } */
 
-/* .imagen-usuario{
-    position: relative;
-    margin-top: 5px;
-} */
-
-/* .imagen-usuario img{
-    width: 150px; 
-    height: 150px; 
-    border-radius: 50%; 
-    border: 5px solid #333;
-    object-fit: cover; 
-} */
-
-/* .imagen-usuario i{
-    font-size: 25px;
-    background-color: #43c6ac81;
-    backdrop-filter: blur(4px);
+/* .mensajeExito {
+    background-color: rgba(9, 255, 0, 0.4);
+    border: 1px solid rgb(9, 255, 0);
+    padding: 15px;
+    width: 300px;
     color: white;
-    padding: 5px 7px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    cursor: pointer;
-    border: 2px solid #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    margin-left: -150px;
 } */
 
-/* .imagen-usuario i:hover p{
-    opacity: 1;
+
+
+
+
+
+/*FOOTER igual al de menú*/
+/* footer {
+    background-color:#11ac78; /* Fondo del footer */
+    padding: 3px 3px; /* Espaciado interno */
+    box-shadow: 0 -2px 10px rgba(10, 44, 28, 0.5);
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    z-index: 20;
 } */
 
-/* .imagen-usuario p{
-    position: absolute;
-    width: 160px;
-    bottom: 10px;
-    left: 50px;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 600;
-    color: #43c6ac;
-    opacity: 0;
-    transition: .5s ease-in-out;
-} */
-
-/* .nombre-usuario{
-    position: absolute;
+/* .footer-content {
     display: flex;
-    font-size: 16px;
-    color: #555;
-    font-weight: 600;
-    gap: 5px;
-    top: 60px;
-    left: 55.5%;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 } */
 
-/* .nombre-email i,
-.nombre-domicilio i,
-.nombre-usuario i{
-    cursor: pointer;
+/* .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 } */
 
-/* .nombre-email i:hover p,
-.nombre-domicilio i:hover p,
-.nombre-usuario i:hover p{
-    opacity: 1;
+/* .footer-links li {
+    margin: 0;
 } */
 
-/* .editarEmailPropietario,
-.editarEmailInquilino,
-.editarDomicilio,
-.editarNombre{
-    color: #43c6ac;
-    opacity: 0;
-    transition: .5s ease-in-out;
-} */
-
-/* .email,
-.domicilio,
-.nombre{
-    font-size: 16px;
-    font-family: cursive;
-    color: #555;
+/* .footer-links a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #f1f1ed;
     text-decoration: none;
-    font-weight: 400;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 5px 5px;
 } */
 
-/* .nombre-domicilio{
-    display: flex;
-    font-size: 16px;
-    color: #555;
-    font-weight: 600;
-    gap: 5px;
-    margin: 60px 0px 0px 80px;
+/* .footer-links a:hover {
+    color: #9deb0c; /* Color al paso del cursor */
 } */
 
-/* .nombre-email{
-    display: flex;
-    font-size: 16px;
-    color: #555;
-    font-weight: 600;
-    gap: 5px;
-    margin: 10px 0px 0px 80px;
+/* .social-media {
+    display: flex; /* Alinea los iconos en fila */
+    align-items: center;
+} */
+
+/* .social-icon {
+    color: #ffffff; /* Color de los iconos */
+    font-size: 20px;
+    margin: 0 5px; /* Reduce el margen horizontal entre iconos */
+    transition: color 0.3s, transform 0.3s;
+} */
+
+/* .social-icon:hover {
+    color: #a7ebdf; /* Color de los iconos al pasar el cursor */
+    transform: scale(1.5); /* Aumenta el tamaño al pasar el cursor */
+} */
+
+/* p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    color: #ffffff;
 } */
