@@ -403,8 +403,35 @@ footer{
 }
 
 
+/*---------------------------------------------------------*/
 
+.open-modal-btn {
+    background-color: #4CAF50; /* Verde */
+    color: white; /* Texto blanco */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a una mano */
+    transition: all 0.3s ease; /* Suaviza los cambios de estilo */
+}
 
+.open-modal-btn:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Agrandar ligeramente */
+}
+
+.open-modal-btn:active {
+    background-color: #3e8e41; /* Aún más oscuro al hacer clic */
+    transform: scale(0.95); /* Reducir ligeramente */
+}
+
+.open-modal-btn:disabled {
+    background-color: #cccccc; /* Gris para botones deshabilitados */
+    color: #666666; /* Texto gris oscuro */
+    cursor: not-allowed; /* Cambia el cursor a una cruz */
+}
 
 
 

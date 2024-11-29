@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".btn-eliminar").forEach(button => {
         button.addEventListener("click", event => {
-            const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este usuario?");
+            const confirmDelete = confirm("¿Estás seguro de que deseas eliminar?");
             if (!confirmDelete) {
                 event.preventDefault();
             }
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// FILTRO BUSQUEDA
+// FILTRO BUSQUEDA USUARIOS
 
 document.addEventListener("DOMContentLoaded", () => {
     const filtros = [
@@ -29,6 +29,27 @@ document.addEventListener("DOMContentLoaded", () => {
             filas.forEach(fila => {
                 const email = fila.children[1].textContent.toLowerCase();
                 fila.style.display = email.includes(query) ? "" : "none";
+            });
+        });
+    });
+});
+
+// FILTRO BUSQUEDA INMUBLES (Diego- Agregar)
+
+document.addEventListener("DOMContentLoaded", () => {
+    const filtros1 = [
+        { inputId: "filtroInmuebles", tablaSelector: "section:nth-of-type(1) tbody tr" },
+    ];
+
+    filtros1.forEach(({ inputId, tablaSelector }) => {
+        const filtroInput = document.getElementById(inputId);
+        const filas = document.querySelectorAll(tablaSelector);
+
+        filtroInput.addEventListener("input", () => {
+            const query = filtroInput.value.toLowerCase();
+            filas.forEach(fila => {
+                const localidad = fila.children[2].textContent.toLowerCase();
+                fila.style.display = localidad.includes(query) ? "" : "none";
             });
         });
     });

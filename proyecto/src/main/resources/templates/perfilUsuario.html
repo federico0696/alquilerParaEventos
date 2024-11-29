@@ -91,8 +91,13 @@
             <div th:if="${alquiler != null}">
                 <h4 th:text="${alquiler.fechaInicio}"></h4>
                 <h4 th:text="${alquiler.fechaFin}"></h4>
+<<<<<<< HEAD
                 <h4 th:text="${alquiler.precioDia}"></h4>
                 <h4 th:text="${alquiler.precioTotal}"></h4>
+=======
+                <h4 th:text="'$'+${alquiler.precioDia}+' Por Dia'"></h4>
+                <h4 th:text="'$'+${alquiler.precioTotal}+' Total'"></h4>
+>>>>>>> developer
                 <h4 th:text="${inmueble.localidad}"></h4>
                 <h4 th:text="${inmueble.ubicacion}"></h4>
                 <img th:src="${inmueble.imagen}" alt="Imagen del Inmueble">
@@ -104,8 +109,13 @@
             <div th:if="${alquiler1 != null}">
                 <h4 th:text="${alquiler1.fechaInicio}"></h4>
                 <h4 th:text="${alquiler1.fechaFin}"></h4>
+<<<<<<< HEAD
                 <h4 th:text="${alquiler1.precioDia}"></h4>
                 <h4 th:text="${alquiler1.precioTotal}"></h4>
+=======
+                <h4 th:text="'$'+${alquiler1.precioDia}+' Por Dia'"></h4>
+                <h4 th:text="'$'+${alquiler1.precioTotal}+' Total'"></h4>
+>>>>>>> developer
                 <h4 th:text="${inmueble1.localidad}"></h4>
                 <h4 th:text="${inmueble1.ubicacion}"></h4>
                 <img th:src="${inmueble1.imagen}" alt="Imagen del Inmueble">
@@ -117,8 +127,13 @@
             <div th:if="${alquiler2 != null}">
                 <h4 th:text="${alquiler2.fechaInicio}"></h4>
                 <h4 th:text="${alquiler2.fechaFin}"></h4>
+<<<<<<< HEAD
                 <h4 th:text="${alquiler2.precioDia}"></h4>
                 <h4 th:text="${alquiler2.precioTotal}"></h4>
+=======
+                <h4 th:text="'$'+${alquiler2.precioDia}+' Por Dia'"></h4>
+                <h4 th:text="'$'+${alquiler2.precioTotal}+' Total'"></h4>
+>>>>>>> developer
                 <h4 th:text="${inmueble2.localidad}"></h4>
                 <h4 th:text="${inmueble2.ubicacion}"></h4>
                 <img th:src="${inmueble2.imagen}" alt="Imagen del Inmueble">
@@ -136,27 +151,45 @@
                 <h4 th:text="${inmueble.localidad}"></h4>
                 <h4 th:text="${inmueble.ubicacion}"></h4>
                 <img th:src="${inmueble.imagen}" alt="Imagen del Inmueble">
+<<<<<<< HEAD
                 <h4 th:text="${inmueble.precioDia}"></h4>
                 <form th:action="@{/perfil/eliminarInmueble/__${inmueble.idInmueble}__}" method="POST">
                     <button>Eliminar alquiler</button>
+=======
+                <h4 th:text="'$'+${inmueble.precioDia}+' Por Dia'"></h4>
+                <form th:action="@{/perfil/eliminarInmueble/__${inmueble.idInmueble}__}" method="POST">
+                    <button>Eliminar inmueble</button>
+>>>>>>> developer
                 </form>
             </div>
             <div th:if="${inmueble1 != null}">
                 <h4 th:text="${inmueble1.localidad}"></h4>
                 <h4 th:text="${inmueble1.ubicacion}"></h4>
                 <img th:src="${inmueble1.imagen}" alt="Imagen del Inmueble">
+<<<<<<< HEAD
                 <h4 th:text="${inmueble1.precioDia}"></h4>
                 <form th:action="@{/perfil/eliminarInmueble/__${inmueble1.idInmueble}__}" method="POST">
                     <button>Eliminar alquiler</button>
+=======
+                <h4 th:text="'$'+${inmueble1.precioDia}+' Por Dia'"></h4>
+                <form th:action="@{/perfil/eliminarInmueble/__${inmueble1.idInmueble}__}" method="POST">
+                    <button>Eliminar inmueble</button>
+>>>>>>> developer
                 </form>
             </div>
             <div th:if="${inmueble2 != null}">
                 <h4 th:text="${inmueble2.localidad}"></h4>
                 <h4 th:text="${inmueble2.ubicacion}"></h4>
                 <img th:src="${inmueble2.imagen}" alt="Imagen del Inmueble">
+<<<<<<< HEAD
                 <h4 th:text="${inmueble2.precioDia}"></h4>
                 <form th:action="@{/perfil/eliminarInmueble/__${inmueble2.idInmueble}__}" method="POST">
                     <button>Eliminar alquiler</button>
+=======
+                <h4 th:text="'$'+${inmueble2.precioDia}+' Por Dia'"></h4>
+                <form th:action="@{/perfil/eliminarInmueble/__${inmueble2.idInmueble}__}" method="POST">
+                    <button>Eliminar inmueble</button>
+>>>>>>> developer
                 </form>
             </div>
         </div>

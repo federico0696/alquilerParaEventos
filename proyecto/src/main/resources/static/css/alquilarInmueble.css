@@ -2,9 +2,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url(/img/duraznos.jpeg) no-repeat center center fixed; 
-    background-size: cover;
-    position: relative;
     
 }
 
@@ -37,7 +34,7 @@ body > * {
 
 body{
     min-height: 100vh;
-    background-color: #1ABC9C;
+    background-color: #60c8ee;
     background-size: cover;
     background-position: center;
 }
@@ -117,93 +114,70 @@ body{
     color: white;
     text-decoration: none;
     padding: 6px 20px 6px 20px;
+
+
 }
-
-
-
-/*-----------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------*/
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-}
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .contenedor {
     width: 60%;
+    height: 50%;
     margin: 15;
     padding: 20px;
     margin-left: 20%;
+    background-color: #a0deee00;
     }
 
-.contenedor-inmuebles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 20px; 
 
-}
 
 .inmueble {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff00;
+    border: 2px solid #dddddd00;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+    align-items: center;
+    justify-content: center;
 
-.inmueble:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .inmueble-imagen img {
     width: 100%;
-    height: 150px; 
+    height: 600px; 
     object-fit: cover; 
+    border-radius: 8px
 }
 
-.inmueble-detalles {
-    padding: 15px;
+.alquilarQuincho {
+    
+    width: 60%;
+    height: 60px;
+    background: linear-gradient(45deg, grey, silver);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    color: rgb(12, 12, 12);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 20%;
+    
+}
+.alquilarQuincho:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
 .inmueble-titulo {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: oblique;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    color: #333;
-}
-
-.inmueble-precio {
-    font-size: 14px;
-    color: #000;
-    margin: 5px 0;
-}
-
-.inmueble-precio span {
-    font-weight: bold;
-    color: #000;
-}
-
-.tarjeta {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 0, 0, 0);
-    position: absolute;
-
-}
-.tarjeta button {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 255, 0); 
-    border: none; 
-    padding: 0; 
-    outline: none;
-    cursor: pointer; 
-    appearance: none;
+    color: #0e0d0d;
 }

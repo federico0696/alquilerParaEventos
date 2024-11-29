@@ -43,6 +43,10 @@
     <div class="contenedor">
         <div class="contenedor-inmuebles">
             <div class="inmueble" th:each="inmueble : ${inmuebles}">
+                <form class="tarjeta" th:action="@{/inmueble/alquilarInmueble}" method="GET">
+                    <input type="hidden" th:value="${inmueble.idInmueble}" name="idInmueble">
+                    <button> </button>
+                </form>
                 <h4 class="inmueble-titulo" th:text="${inmueble.categoria}"></h4>
                 <div class="inmueble-imagen">
                     <img th:src="${inmueble.imagen}" alt="Imagen de inmueble">
@@ -56,10 +60,6 @@
                         
                     </p>
                 </div>
-                <form th:action="@{/inmueble/alquilarInmueble}" method="GET">
-                    <input th:value="${inmueble.idInmueble}" name="idInmueble">
-                    <button>VER</button>
-                </form>
             </div>
         </div>
     </div>
